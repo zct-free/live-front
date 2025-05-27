@@ -94,11 +94,6 @@ const onOpenChange = (keys: string[]) => {
 </script>
 
 <style lang="less" scoped>
-.app-sidebar {
-  // height: 100vh; /* This might conflict with ALayoutSider, let Ant handle height */
-  // background: #001529; /* Sider has its own theme prop (dark/light) */
-}
-
 .logo {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);

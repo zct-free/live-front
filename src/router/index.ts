@@ -30,8 +30,20 @@ const routes: Array<RouteRecordRaw> = [
 				component: () => import("@/views/SubPageView.vue"), // Ensure this view exists
 				meta: {
 					title: "Sub Page" /*, icon: "SomeIcon" */,
+                    icon: "UserOutlined"
 				},
 			},
+			{
+				path: "canvas",
+				name: "canvas",
+				component: () => import("@/views/canvas.vue"), // Ensure this view exists
+				meta: {
+					title: "Canvas",
+					icon: "CanvasIcon"
+				},
+			},
+			
+
 			// Add other routes that use AdminLayout here
 		],
 	},
