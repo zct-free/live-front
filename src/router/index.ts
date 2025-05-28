@@ -14,13 +14,14 @@ const routes: Array<RouteRecordRaw> = [
 		path: "/", // Parent route for all authenticated views
 		component: AdminLayout, // Use AdminLayout as the component for this route
 		meta: { requiresAuth: true },
+		redirect: "home",
 		children: [
 			{
 				path: "/home", // Default child for root, effectively makes '/' the home path
 				name: "home",
-				component: () => import("@/views/HomeView.vue"),
+				component: () => import("@/views/Home/HomeView.vue"),
 				meta: {
-					title: "Home",
+					title: "首页",
 					icon: "HomeOutlined", // Keep existing icon for sidebar
 				},
 			},
@@ -29,7 +30,7 @@ const routes: Array<RouteRecordRaw> = [
 				name: "sub-page",
 				component: () => import("@/views/SubPageView.vue"), // Ensure this view exists
 				meta: {
-					title: "Sub Page" /*, icon: "SomeIcon" */,
+					title: "子页面",
 					icon: "UserOutlined",
 				},
 			},
@@ -46,7 +47,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, _from, next) => {
 	const userStore = useUserStore();
-	const isLoggedIn = userStore.isLoggedIn;
+	const isLoggedIn = (userStore as any).isLoggedIn;
 
 	// Check if any matched route record requires authentication
 	const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
@@ -57,10 +58,10 @@ router.beforeEach(async (to, _from, next) => {
 	} else if (to.name === "login" && isLoggedIn) {
 		// If user is logged in and tries to access login page, redirect to home
 		next({ name: "home" });
-	} else if (isLoggedIn && !userStore.userInfo) {
+	} else if (isLoggedIn && !(userStore as any).userInfo) {
 		// If user is logged in but userInfo is not loaded, try to load it
 		try {
-			await userStore.checkAuth();
+			await (userStore as any).checkAuth();
 			next(); // Proceed to the requested route
 		} catch (error) {
 			// If auth check fails, logout and redirect to login
