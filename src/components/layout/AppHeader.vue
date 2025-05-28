@@ -1,41 +1,108 @@
 <template>
   <a-layout-header class="app-header">
-    Admin Header
-    <div style="float: right;">
-      <a-button type="link" @click="handleLogout">Logout</a-button>
+    <div class="header-left">
+      <span class="app-title">Vue3 Admin</span>
+    </div>
+    <div class="header-right">
+      <a-dropdown>
+        <template #overlay>
+          <a-menu>
+            <a-menu-item key="profile">
+              <UserOutlined />
+              个人资料
+            </a-menu-item>
+            <a-menu-item key="settings">
+              <SettingOutlined />
+              设置
+            </a-menu-item>
+            <a-menu-divider />
+            <a-menu-item key="logout" @click="handleLogout">
+              <LogoutOutlined />
+              退出登录
+            </a-menu-item>
+          </a-menu>
+        </template>
+        <a-button type="text" class="user-info">
+          <a-avatar :size="32" :src="userStore.userInfo?.avatar">
+            <template #icon><UserOutlined /></template>
+          </a-avatar>
+          <span class="username">{{ userStore.userInfo?.name || '用户' }}</span>
+          <DownOutlined />
+        </a-button>
+      </a-dropdown>
     </div>
   </a-layout-header>
 </template>
 
 <script setup lang="ts">
-// ALayoutHeader, AButton are globally available from Ant Design Vue
+import { useUserStore } from '@/store/user';
+import { DownOutlined, LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons-vue';
+import { message } from 'ant-design-vue';
 import { useRouter } from 'vue-router';
-import { logout } from '@/services/authService'; // Assuming authService handles logout and redirect
 
 const router = useRouter();
+const userStore = useUserStore();
 
-const handleLogout = () => {
-  logout();
-  // logout() in authService should handle redirecting to login
-  // If not, you can add: router.push({ name: 'login' });
+const handleLogout = async () => {
+  try {
+    await userStore.logout();
+    message.success('已成功退出登录');
+    router.push({ name: 'login' });
+  } catch (error) {
+    console.error('退出登录失败:', error);
+    message.error('退出登录失败');
+  }
 };
-
-// defineOptions({ name: 'AppHeader' }); // Optional
 </script>
 
 <style lang="less" scoped>
 .app-header {
-  background: #001529; // Ant Design default dark header color
+  background: #001529;
   color: white;
-  padding: 0 24px; // Adjusted padding
-  text-align: center;
-  display: flex; /* Use flex to align items */
-  justify-content: space-between; /* Pushes Admin Header left and Logout button right */
-  align-items: center; /* Vertically center items */
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 }
 
-/* If you need to style the logout button specifically */
-.app-header .ant-btn-link {
-  color: white; /* Ensure link button is visible on dark background */
+.header-left {
+  .app-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+  }
 }
-</style> 
+
+.header-right {
+  .user-info {
+    color: white;
+    border: none;
+    height: auto;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .username {
+      margin: 0 4px;
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+:deep(.ant-dropdown-menu) {
+  .ant-menu-item {
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+}
+</style>

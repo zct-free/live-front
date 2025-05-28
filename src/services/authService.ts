@@ -1,5 +1,6 @@
 import { ref } from 'vue';
 import router from '@/router'; // Import router for programmatic navigation in logout
+import {useUserStore} from  '@/store/user'
 
 const isAuthenticated = ref<boolean>(localStorage.getItem('isAuthenticated') === 'true');
 
@@ -13,6 +14,7 @@ export const login = (username: string, pass: string): Promise<boolean> => {
     setTimeout(() => {
       if (username === 'admin' && pass === 'password') {
         localStorage.setItem('isAuthenticated', 'true');
+        
         isAuthenticated.value = true;
         resolve(true);
       } else {
