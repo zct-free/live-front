@@ -54,7 +54,6 @@ const onFinish = async (values: any) => {
       username: values.username,
       password: values.password,
     });
-    
     message.success('登录成功！');
     
     // 获取重定向路径或默认跳转到首页

@@ -65,7 +65,7 @@ router.beforeEach(async (to, _from, next) => {
 			next(); // Proceed to the requested route
 		} catch (error) {
 			// If auth check fails, logout and redirect to login
-			// await userStore.logout();
+			await userStore.logout();
 			next({ name: "login", query: { redirect: to.fullPath } });
 		}
 	} else {
