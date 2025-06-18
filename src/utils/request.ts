@@ -147,13 +147,13 @@ service.interceptors.response.use(
 				message.error("服务器内部错误");
 				break;
 			default:
-				message.error(data.message || "请求失败");
+				// message.error(data.message || "请求失败");
+				break;
 		}
 
 		return Promise.reject(new Error(data.message || "请求失败"));
 	},
 	(error) => {
-		console.error("响应错误:", error);
 
 		// 清理请求管理器中的记录（如果有requestId）
 		if (error.config?.metadata?.requestId) {

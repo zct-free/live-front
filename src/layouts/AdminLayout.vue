@@ -4,6 +4,7 @@
 		<a-layout>
 			<AppSidebar />
 			<a-layout-content class="content-area">
+				<BreadCrumb />
 				<router-view />
 			</a-layout-content>
 		</a-layout>
@@ -13,9 +14,7 @@
 <script setup lang="ts">
 import AppHeader from "@/components/layout/AppHeader.vue";
 import AppSidebar from "@/components/layout/AppSidebar.vue";
-// ALayout, ALayoutContent are globally available from Ant Design Vue
-
-// defineOptions({ name: 'AdminLayout' }); // Optional
+import BreadCrumb from "@/components/layout/BreadCrumb.vue";
 </script>
 
 <style lang="less" scoped>

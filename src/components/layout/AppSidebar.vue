@@ -1,7 +1,7 @@
 <template>
   <a-layout-sider width="220" class="app-sidebar" v-model:collapsed="collapsed" collapsible>
-    <div class="logo" /> <!-- Optional: for a logo -->
-    <a-menu theme="dark" mode="inline" :selectedKeys="selectedKeys" :openKeys="openKeys" @openChange="onOpenChange">
+    <!-- <div class="logo" />  -->
+    <a-menu  mode="inline" :selectedKeys="selectedKeys" :openKeys="openKeys" @openChange="onOpenChange" theme="dark">
       <template v-for="route in menuRoutes" :key="route.name">
         <!-- Simple Menu Item -->
         <a-menu-item v-if="!route.children || route.children.length === 0" :key="route.name?.toString() || route.path">
@@ -102,4 +102,6 @@ const onOpenChange = (keys: string[]) => {
 
 // Menu item styling is largely handled by Ant Design themes
 // You can add overrides here if needed
+.ant-layout-sider{
+}
 </style> 
