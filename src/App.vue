@@ -1,10 +1,24 @@
 <template>
-  <router-view />
+	<a-config-provider v-bind="appConfigProvider">
+		<router-view />
+	</a-config-provider>
 </template>
 
 <script setup lang="ts">
-// No script logic needed for App.vue if it's just a router-view wrapper
-// defineOptions({ name: 'App' }); // Optional
+import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn'; // Import Chinese locale for dayjs
+dayjs.locale('zh-cn'); // Set dayjs locale to Chinese
+const getPopupContainer = (triggerNode: HTMLElement) => {
+	return (triggerNode.parentNode as HTMLElement) || document.body;
+};
+const appConfigProvider = {
+	getPopupContainer() {
+		return getPopupContainer(document.body);
+	},
+	locale: zhCN, // Set the locale to Chinese
+
+};
 </script>
 
 <style lang="less">
@@ -12,14 +26,17 @@
 html,
 body,
 #app {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: "微软雅黑", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #4e4e4e;
+	background: #fff;
 }
 </style>

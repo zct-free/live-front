@@ -5,7 +5,7 @@ import { createVitePlugins } from "./build/plugin/index";
 export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
 	const root = process.cwd();
 	const env = loadEnv(mode, root, "");
-	const { VITE_PUBLIC_PATH } = env;
+	const { VITE_PUBLIC_PATH, VITE_API_URL } = env;
 	const isBuild = command === "build";
 	const isProduction = mode === "production";
 	return {
@@ -15,6 +15,13 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
 		server: {
 			host: true,
 			open: true,
+			proxy: {
+				"/api": {
+					target: VITE_API_URL,
+					changeOrigin: true,
+					rewrite: (path) => path.replace(/^\/api/, ""),
+				},
+			},
 		},
 		resolve: {
 			alias: [

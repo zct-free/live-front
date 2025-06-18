@@ -1,7 +1,8 @@
 // 用户管理 Store
-import type { LoginParams, UserInfo } from "@/types/user";
+import type { LoginParams, UserInfo, LoginResponse } from "@/types/user";
 import { get, post } from "@/utils/request";
 import { defineStore } from "pinia";
+import { loginApi } from "@/api/login";
 
 // 定义状态类型
 interface UserState {
@@ -22,7 +23,7 @@ export const useUserStore = defineStore("user", {
 	getters: {
 		isLoggedIn: (state: any) => !!state.token,
 		userName: (state: any) => state.userInfo?.name || "",
-		userRole: (state: any) => state.userInfo?.role || "guest",
+		userRole: (state: any) => state.userInfo?.role || "",
 		hasPermission: (state: any) => (permission: string) => {
 			return state.permissions.indexOf(permission) !== -1;
 		},
@@ -31,53 +32,43 @@ export const useUserStore = defineStore("user", {
 		async login(params: LoginParams): Promise<{ token: string; user: UserInfo }> {
 			(this as any).loading = true;
 			try {
-				// 演示用的本地验证
-				if (params.username === "admin" && params.password === "password") {
-					const mockResponse = {
-						token: "mock-jwt-token-" + Date.now(),
-						user: {
-							id: 1,
-							name: "Admin User",
-							username: "admin",
-							email: "admin@example.com",
-							avatar: "",
-							role: "admin",
-							status: "active" as const,
-							lastLoginTime: new Date().toISOString(),
-						},
-					};
+				const mockResponse = {
+					token: "mock-jwt-token-" + Date.now(),
+					user: {
+						id: 1,
+						name: "Admin User",
+						username: "admin",
+						email: "admin@example.com",
+						avatar: "",
+						role: "admin",
+						status: "active" as const,
+						lastLoginTime: new Date().toISOString(),
+					},
+				};
 
-					// 保存 token
-					(this as any).token = mockResponse.token;
-					localStorage.setItem("token", mockResponse.token);
+				// 保存 token
+				(this as any).token = mockResponse.token;
+				localStorage.setItem("token", mockResponse.token);
 
-					// 保存用户信息
-					(this as any).userInfo = mockResponse.user;
-					// 设置模拟权限
-					(this as any).permissions = ["read", "write", "admin"];
+				// 保存用户信息
+				(this as any).userInfo = mockResponse.user;
+				// 设置模拟权限
+				(this as any).permissions = ["read", "write", "admin"];
 
-					return mockResponse;
-				} else {
-					throw new Error("用户名或密码错误");
-				}
+				return mockResponse;
+				const axiosResponse = await loginApi(params);
+				const response: LoginResponse = axiosResponse.data;
+				// 保存 token
+				(this as any).token = response.token;
+				localStorage.setItem("token", response.token);
 
-				// 以下是真实API调用的代码（当有后端API时使用）
-				/*
-        const { request } = post<{ token: string; user: UserInfo }>('/api/auth/login', params);
-        const response = await request;
-        
-        // 保存 token
-        (this as any).token = response.token;
-        localStorage.setItem('token', response.token);
-        
-        // 保存用户信息
-        (this as any).userInfo = response.user;
-        
-        // 获取权限
-        await this.fetchPermissions();
-        
-        return response;
-        */
+				// 保存用户信息
+				(this as any).userInfo = response.user;
+
+				// 获取权限
+				// await this.fetchPermissions();
+
+				return response;
 			} catch (error) {
 				console.error("登录失败:", error);
 				throw error;
@@ -98,7 +89,7 @@ export const useUserStore = defineStore("user", {
 				(this as any).token = "";
 				(this as any).userInfo = null;
 				(this as any).permissions = [];
-        localStorage.clear()
+				localStorage.clear();
 			}
 		},
 
