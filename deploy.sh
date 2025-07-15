@@ -24,21 +24,21 @@ case $ENV in
         SERVER_HOST="140.210.90.103"
         SERVER_USER="root"
         SERVER_PATH="/root/nginx/html"
-        BUILD_CMD="yarn build:stage"
+        BUILD_CMD="pnpm build:stage"
         REMOTE_FILENAME="live-front.tar.gz"
         ;;
     "test")
         SERVER_HOST="140.210.90.103"
         SERVER_USER="root"
         SERVER_PATH="/root/nginx/html"
-        BUILD_CMD="yarn build:test"
+        BUILD_CMD="pnpm build:test"
         REMOTE_FILENAME="live-front.tar.gz"
         ;;
     "prod")
         SERVER_HOST="140.210.90.103"
         SERVER_USER="root"
         SERVER_PATH="/root/nginx/html"
-        BUILD_CMD="yarn build:prod"
+        BUILD_CMD="pnpm build:prod"
         REMOTE_FILENAME="live-front.tar.gz"
         ;;
     *)

@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/", // Parent route for all authenticated views
     component: AdminLayout, // Use AdminLayout as the component for this route
     meta: { requiresAuth: false },
-    // redirect: "live",
+    redirect: "live",
     children: [
       {
         path: "live", // Default child for root, effectively makes '/' the home path
@@ -127,6 +127,24 @@ const routes: Array<RouteRecordRaw> = [
             },
           },
         ],
+      },
+      {
+        path: "liveStatis",
+        redirect: "platform-statistics",
+        children: [
+          {
+            path: "platform-statistics",
+            name: "live-statis",
+            component: () => import("@/views/statis/index.vue"), // Ensure this view exists
+
+            meta: {
+              title: "平台统计",
+            },
+          },
+        ],
+        meta: {
+          title: "直播统计",
+        },
       },
     ],
   },

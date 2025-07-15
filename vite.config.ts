@@ -57,7 +57,7 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
       cssTarget: "chrome80",
       cssMinify: "esbuild",
       sourcemap: isProduction ? false : "inline",
-      outDir: "live-dist",
+      outDir: "live-front",
       rollupOptions: {
         output: {
           chunkFileNames: "js/[name]-[hash].js",

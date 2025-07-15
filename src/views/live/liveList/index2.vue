@@ -7,10 +7,7 @@
 import { computed } from "vue";
 
 const url = computed(() => {
-  if (import.meta.env.VITE_NODE_ENV === "development") {
-    return `http://192.168.0.2:6003/live/manage`;
-  }
-  return `${location.origin}/live/manage`;
+  return `http://140.210.90.103:39843/live/manage`;
 });
 </script>
 <style scoped>
