@@ -1,54 +1,200 @@
 #!/bin/bash
 
-# 配置远程仓库地址和分支名称
-REPO_URL="https://git.baijiashilian.com/fz/zhlz/frontend/zhlz-frontend.git"  # 替换为你的远程仓库地址
-BRANCH_NAME="jx-jw"  # 替换为你的分支名称
+# CMS前端简易部署脚本
+# 使用方法: ./deploy.sh [环境]
+# 环境选项: stage(默认), stage, prod
 
-# 临时目录名称
-TEMP_DIR="temp_repo"
+set -e  # 遇到错误立即退出
 
-# 检查临时目录是否存在
-if [ -d "$TEMP_DIR" ]; then
-  # 如果目录存在，进入目录并拉取最新代码
-  echo "目录 $TEMP_DIR 已存在，拉取最新代码..."
-  cd $TEMP_DIR
-  git pull origin $BRANCH_NAME
+# ==================== 配置区域 ====================
+# 获取环境参数，默认为test
+ENV=${1:-stage}
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+
+# 文件命名配置
+PROJECT_NAME="live-front"
+VERSION=$(grep '"version"' package.json 2>/dev/null | sed 's/.*"version": *"\([^"]*\)".*/\1/' || echo "1.0.0")
+
+# 生成文件名（可以根据需要修改命名规则）
+ARCHIVE_NAME="${PROJECT_NAME}.tar.gz"
+
+# 服务器配置
+case $ENV in
+    "stage")
+        SERVER_HOST="140.210.90.103"
+        SERVER_USER="root"
+        SERVER_PATH="/root/nginx/html"
+        BUILD_CMD="yarn build:stage"
+        REMOTE_FILENAME="live-front.tar.gz"
+        ;;
+    "test")
+        SERVER_HOST="140.210.90.103"
+        SERVER_USER="root"
+        SERVER_PATH="/root/nginx/html"
+        BUILD_CMD="yarn build:test"
+        REMOTE_FILENAME="live-front.tar.gz"
+        ;;
+    "prod")
+        SERVER_HOST="140.210.90.103"
+        SERVER_USER="root"
+        SERVER_PATH="/root/nginx/html"
+        BUILD_CMD="yarn build:prod"
+        REMOTE_FILENAME="live-front.tar.gz"
+        ;;
+    *)
+        echo "❌ 不支持的环境: $ENV"
+        echo "支持的环境: dev, test, prod"
+        exit 1
+        ;;
+esac
+
+# ==================== 工具函数 ====================
+log_info() {
+    echo "🔵 $(date '+%H:%M:%S') - $1"
+}
+
+log_success() {
+    echo "✅ $(date '+%H:%M:%S') - $1"
+}
+
+log_error() {
+    echo "❌ $(date '+%H:%M:%S') - $1" >&2
+}
+
+# 检查命令是否存在
+check_command() {
+    if ! command -v "$1" &> /dev/null; then
+        log_error "命令 '$1' 未找到，请先安装"
+        exit 1
+    fi
+}
+
+# ==================== 主要流程 ====================
+log_info "开始部署 ruoyi 前端项目"
+log_info "目标环境: $ENV"
+log_info "项目版本: $VERSION"
+log_info "目标服务器: $SERVER_USER@$SERVER_HOST:$SERVER_PATH"
+log_info "本地压缩包: $ARCHIVE_NAME"
+log_info "远程文件名: $REMOTE_FILENAME"
+
+# # 生产环境确认
+# if [[ "$ENV" == "prod" ]]; then
+#     echo ""
+#     echo "⚠️  即将部署到生产环境！"
+#     read -p "请输入 'YES' 确认继续: " confirm
+#     if [[ "$confirm" != "YES" ]]; then
+#         log_info "部署已取消"
+#         exit 0
+#     fi
+# fi
+
+# 1. 检查依赖
+log_info "检查系统依赖..."
+check_command "npm"
+check_command "tar"
+check_command "scp"
+check_command "ssh"
+
+# 2. 检查项目文件
+if [[ ! -f "package.json" ]]; then
+    log_error "package.json 文件不存在，请在项目根目录下执行脚本"
+    exit 1
+fi
+
+# 3. 检查是否存在已构建的live-front目录
+if [[ -d "live-front" ]]; then
+    log_info "发现已存在的构建目录 'live-front'，将重新构建以确保使用最新代码"
 else
-  # 如果目录不存在，克隆仓库
-  echo "正在克隆远程仓库 $REPO_URL 的分支 $BRANCH_NAME..."
-  git clone -b $BRANCH_NAME $REPO_URL $TEMP_DIR
-  cd $TEMP_DIR
+    log_info "未发现构建目录 'live-front'，将执行完整构建流程"
 fi
 
-# 安装依赖
-npm config set registry https://registry.npmmirror.com/
-pnpm config set registry https://registry.npmmirror.com/
-pnpm install --no-frozen-lockfile
-npm run build
-echo "正在安装依赖..."
-npm install  # 如果是 npm 项目
-# yarn install  # 如果是 yarn 项目
+# # 4. 安装依赖
+# log_info "安装项目依赖..."
+# yarn install || {
+#     log_error "依赖安装失败"
+#     exit 1
+# }
 
-# 打包项目
-echo "正在打包项目..."
-npm run build  # 如果是 npm 项目
-# yarn build  # 如果是 yarn 项目
+# 5. 构建项目
+log_info "构建项目 ($BUILD_CMD)..."
+$BUILD_CMD || {
+    log_error "项目构建失败"
+    exit 1
+}
 
-# 检查 dist 目录是否存在
-if [ ! -d "dist" ]; then
-  echo "错误: 打包后未生成 dist 目录！"
-  exit 1
+# 6. 最终检查构建结果
+if [[ ! -d "live-front" ]]; then
+    log_error "构建输出目录 'live-front' 不存在"
+    exit 1
 fi
 
-# 将 dist 目录重命名为 jw
-echo "将 dist 目录重命名为 jw..."
-mv dist jw
+# 7. 创建压缩包
+log_info "创建部署压缩包..."
+tar -zcf "$ARCHIVE_NAME" live-front/ || {
+    log_error "创建压缩包失败"
+    exit 1
+}
 
-# 替换当前目录中的 jw 文件
-echo "替换当前目录中的 jw 文件..."
-if [ -d "../jw" ]; then
-  rm -rf ../jw  # 删除旧的 jw 目录
+# 显示压缩包信息
+ARCHIVE_SIZE=$(du -h "$ARCHIVE_NAME" | cut -f1)
+log_success "压缩包创建完成: $ARCHIVE_NAME ($ARCHIVE_SIZE)"
+
+# 8. 上传到服务器
+log_info "上传文件到服务器..."
+log_info "本地文件: $ARCHIVE_NAME"
+log_info "远程文件: $REMOTE_FILENAME"
+scp "$ARCHIVE_NAME" "$SERVER_USER@$SERVER_HOST:$SERVER_PATH/$REMOTE_FILENAME" || {
+    log_error "文件上传失败"
+    rm -f "$ARCHIVE_NAME"
+    exit 1
+}
+
+# 9. 远程部署（已移除备份命令）
+log_info "执行远程部署..."
+ssh "$SERVER_USER@$SERVER_HOST" "
+    cd $SERVER_PATH && \
+    echo '解压新版本...' && \
+    tar -zxf $REMOTE_FILENAME && \
+    echo '清理压缩包...' && \
+    rm -f $REMOTE_FILENAME && \
+    echo '部署完成！'
+" || {
+    log_error "远程部署失败"
+    rm -f "$ARCHIVE_NAME"
+    exit 1
+}
+
+# 10. 清理本地文件
+log_info "清理本地临时文件..."
+rm -f "$ARCHIVE_NAME"
+
+# 删除本地构建目录
+if [[ -d "live-front" ]]; then
+    log_info "删除本地构建目录 'live-front'..."
+    rm -rf "live-front"
+    log_success "本地构建目录已删除"
 fi
-mv jw ../  # 将新的 jw 目录移动到上级目录
 
-echo "操作完成！"
+# 11. 完成
+log_success "🎉 部署完成！"
+log_info "环境: $ENV"
+log_info "版本: $VERSION"
+log_info "服务器: $SERVER_USER@$SERVER_HOST"
+log_info "部署路径: $SERVER_PATH"
+log_info "本地文件: $ARCHIVE_NAME"
+log_info "远程文件: $REMOTE_FILENAME"
+log_info "部署时间: $(date '+%Y-%m-%d %H:%M:%S')"
+
+# 显示访问提示
+case $ENV in
+    "dev")
+        log_info "开发环境访问: http://$SERVER_HOST"
+        ;;
+    "test")
+        log_info "测试环境访问: http://$SERVER_HOST"
+        ;;
+    "prod")
+        echo ""
+        echo "⚠️  生产环境部署完成，请及时验证功能是否正常！"
+        ;;
+esac
