@@ -135,10 +135,33 @@ const routes: Array<RouteRecordRaw> = [
           {
             path: "platform-statistics",
             name: "live-statis",
-            component: () => import("@/views/statis/index.vue"), // Ensure this view exists
-
+            component: () => import("@/views/statis/platformStatistics.vue"), // Ensure this view exists
             meta: {
               title: "平台统计",
+            },
+          },
+          {
+            path: "zbjtj",
+            name: "live-statis-zbjtj",
+            component: () => import("@/views/statis/zbjtj.vue"), // Ensure this view exists
+            meta: {
+              title: "直播间统计",
+            },
+          },
+          {
+            path: "cctj",
+            name: "live-statis-cctj",
+            component: () => import("@/views/statis/cctj.vue"), // Ensure this view exists
+            meta: {
+              title: "场次统计",
+            },
+          },
+          {
+            path: "yhtj",
+            name: "live-statis-yhtj",
+            component: () => import("@/views/statis/yhtj.vue"), // Ensure this view exists
+            meta: {
+              title: "用户统计",
             },
           },
         ],

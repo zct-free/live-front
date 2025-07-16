@@ -1,0 +1,88 @@
+<template>
+  <div class="user-statistics">
+    <div class="page-header">
+      <h2>用户统计</h2>
+    </div>
+
+    <div class="search-form">
+      <a-form :form="searchForm" layout="inline" :colon="false">
+        <a-form-item label="">
+          <a-input v-model:value="searchForm.userId" placeholder="请输入用户ID" style="width: 200px" />
+        </a-form-item>
+
+        <a-form-item label="">
+          <a-date-picker v-model:value="searchForm.date" style="width: 200px" />
+        </a-form-item>
+
+        <a-form-item>
+          <a-space>
+            <a-button type="primary">搜索</a-button>
+            <a-button>导出数据</a-button>
+          </a-space>
+        </a-form-item>
+      </a-form>
+    </div>
+
+    <!-- 数据表格 -->
+    <div class="data-table">
+      <a-table :dataSource="tableData" :columns="columns" :loading="loading">
+        <template #bodyCell="{ column, record }">
+          <template v-if="column.key === 'action'">
+            <a-button type="link">查看</a-button>
+            <a-button type="link">下载</a-button>
+          </template>
+        </template>
+      </a-table>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+import type { Dayjs } from "dayjs";
+import { reactive, ref } from "vue";
+
+const searchForm = reactive({
+  userId: "",
+  date: null as Dayjs | null,
+});
+const loading = ref(false);
+const columns = [
+  { title: "用户ID", dataIndex: "userId", key: "userId" },
+  { title: "用户昵称", dataIndex: "username", key: "username" },
+  { title: "观看次数", dataIndex: "viewCount", key: "viewCount" },
+  { title: "观看总时长", dataIndex: "viewDuration", key: "viewDuration" },
+  { title: "平均观看时长", dataIndex: "viewDuration", key: "viewDuration" },
+
+  { title: "操作", key: "action", scopedSlots: { customRender: "action" } },
+];
+const tableData = ref([
+  {
+    userId: "123456",
+    username: "用户A",
+    viewCount: 10,
+    viewDuration: 120,
+  },
+  {
+    userId: "789012",
+    username: "用户B",
+    viewCount: 5,
+    viewDuration: 60,
+  },
+]);
+</script>
+<style scoped lang="less">
+.user-statistics {
+  padding: 24px;
+}
+
+.page-header {
+  margin-bottom: 16px;
+}
+
+.search-form {
+  margin-bottom: 24px;
+}
+
+.data-table {
+  margin-top: 24px;
+}
+</style>
