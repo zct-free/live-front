@@ -1,14 +1,8 @@
 <template>
   <div class="not-found-container">
-    <a-result
-      status="404"
-      title="404"
-      sub-title="Sorry, the page you visited does not exist."
-    >
+    <a-result status="404" title="404" sub-title="Sorry, the page you visited does not exist.">
       <template #extra>
-        <router-link to="/">
-          <a-button type="primary">Back Home</a-button>
-        </router-link>
+        <a-button type="primary" @click="goHome">Back Home</a-button>
       </template>
     </a-result>
   </div>
@@ -20,6 +14,10 @@
 // If not, import them: import { Result as AResult, Button as AButton } from 'ant-design-vue';
 
 // defineOptions({ name: 'NotFound' }); // Optional
+const goHome = () => {
+  // Navigate to the home page, adjust the path as necessary
+  window.location.href = "/"; // or use router.push({ name: 'home' }) if using Vue Router
+};
 </script>
 
 <style lang="less" scoped>
@@ -30,4 +28,4 @@
   min-height: 100vh; /* Full viewport height */
   padding: 20px;
 }
-</style> 
+</style>

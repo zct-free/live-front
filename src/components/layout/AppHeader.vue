@@ -5,7 +5,7 @@
 
       <div class="user-info">
         <div>你好，{{ (userStore as any).userInfo?.name || "" }}</div>
-        <div @click="handleLogout" class="logout"><LogoutOutlined class="logout-icon" />安全退出</div>
+        <!-- <div @click="handleLogout" class="logout"><LogoutOutlined class="logout-icon" />安全退出</div> -->
       </div>
 
       <!-- <a-dropdown>
@@ -41,7 +41,6 @@
 <script setup lang="ts">
 import BreadCrumb from "@/components/layout/BreadCrumb.vue";
 import { useUserStore } from "@/store/user";
-import { LogoutOutlined } from "@ant-design/icons-vue";
 import { message } from "ant-design-vue";
 import { useRouter } from "vue-router";
 
