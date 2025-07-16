@@ -10,7 +10,7 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
   const isProduction = mode === "production";
   return {
     root,
-    base: "/",
+    base: "/live-system/",
     plugins: createVitePlugins(env, isBuild),
     server: {
       host: true,

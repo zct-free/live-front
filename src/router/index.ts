@@ -14,12 +14,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/", // Parent route for all authenticated views
     component: AdminLayout, // Use AdminLayout as the component for this route
     meta: { requiresAuth: false },
-    redirect: "live",
+    redirect: "live-pd",
     children: [
       {
-        path: "live", // Default child for root, effectively makes '/' the home path
-        name: "live",
-        redirect: "live/list",
+        path: "live-pd", // Default child for root, effectively makes '/' the home path
+        name: "live-pd",
+        redirect: "live-pd/list",
         meta: {
           title: "直播频道",
           icon: "HomeOutlined", // Keep existing icon for sidebar
