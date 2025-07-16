@@ -89,44 +89,8 @@ const findParentKeys = (routes: RouteRecordRaw[], targetName: string | symbol, p
   return parentKeys;
 };
 
-// // 监听路由变化，智能处理菜单展开状态
-// watch(
-// 	() => route.name,
-// 	(routeName) => {
-// 		// 设置选中的菜单项
-// 		// state.selectedKeys = routeName ? [routeName.toString()] : [];
-
-// 		// // 智能展开父级菜单：只展开当前路由的父级菜单，关闭其他所有菜单
-// 		// if (routeName) {
-// 		// 	const parentKeys = findParentKeys(menuRoutes.value, routeName);
-// 		// 	// 只设置当前路由需要的父级菜单，这样会自动关闭其他不相关的菜单
-// 		// 	state.openKeys = [...parentKeys];
-// 		// } else {
-// 		// 	// 没有路由时清空所有展开状态
-// 		// 	state.openKeys = [];
-// 		// }
-// 	},
-// 	{ immediate: true }
-// );
-
 // 处理菜单展开变化
-const onOpenChange = () => {
-  // // 获取所有一级菜单的 key
-  // if (state.rootSubmenuKeys.length === 0) {
-  // 	state.rootSubmenuKeys = menuRoutes.value.filter((route) => route.children && route.children.length > 0).map((route) => route.name as string);
-  // }
-  // // 找到最新点击的菜单key（新展开的）
-  // const latestOpenKey = openKeys.find((key) => !state.openKeys.includes(key));
-  // if (latestOpenKey && state.rootSubmenuKeys.includes(latestOpenKey)) {
-  // 	// 如果点击展开一级菜单，只保留这一个展开的菜单
-  // 	state.openKeys = [latestOpenKey];
-  // } else {
-  // 	// 其他情况（收起菜单、多级菜单等），直接使用传入的openKeys
-  // 	state.openKeys = openKeys;
-  // }
-};
-
-// defineOptions({ name: 'AppSidebar' }); // Optional: if you need to explicitly set the component name
+const onOpenChange = () => {};
 </script>
 
 <style lang="less" scoped>
@@ -143,6 +107,15 @@ const onOpenChange = () => {
 .app-sidebar {
   // 侧边栏自定义样式
   // background-color: #fff;
+  overflow: auto;
+  // 滚动条轨道
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  // 滑块
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
 
   .ant-menu {
     border-right: none;

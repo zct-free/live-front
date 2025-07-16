@@ -135,7 +135,6 @@
 .compliance-settings {
   padding: 20px;
   padding-bottom: 60px; // 增加底部内边距
-  background: #f5f5f5;
   min-height: calc(100vh - 60px); // 调整最小高度，留出底部空间
   box-sizing: border-box;
 

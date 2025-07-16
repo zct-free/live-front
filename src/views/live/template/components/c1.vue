@@ -341,15 +341,11 @@ const handleSave = () => {
 <style lang="less" scoped>
 .chat-settings {
   padding: 20px;
-  background: #f5f5f5;
   min-height: 100vh;
 
   .section {
     background: white;
-    border-radius: 8px;
-    padding: 24px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .section-title {

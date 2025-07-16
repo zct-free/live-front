@@ -123,7 +123,7 @@
       <div class="registration-section">
         <div class="section-header">
           <div class="section-info">
-            <span class="section-label">报名高级：</span>
+            <span class="section-label">报名观看：</span>
             <a-switch v-model:checked="registrationSettings.advancedRegistration" />
             <span class="section-desc">观众需要填写以下问题才能收看直播，关联观看数据需要直播前添加</span>
           </div>
@@ -133,7 +133,7 @@
       <!-- 审核机制 -->
       <div class="registration-section">
         <div class="section-header">
-          <span class="section-label">填写机制：</span>
+          <span class="section-label">填写时机：</span>
           <a-radio-group v-model:value="registrationSettings.auditMechanism" class="audit-radio-group">
             <a-radio value="auto">进入直播间</a-radio>
             <a-radio value="manual">全与后台时</a-radio>
@@ -223,12 +223,119 @@
         <a-button size="large" @click="handlePreview"> 预览 </a-button>
       </div>
     </div>
+
+    <!-- 商品库内容 -->
+    <div class="content-section" v-if="activeTab === 'productLibrary'">
+      <div class="registration-section">
+        <div class="section-header">
+          <div class="section-info">
+            <span class="section-label">商品讲解：</span>
+            <a-switch v-model:checked="registrationSettings.advancedRegistration" />
+            <span class="section-desc">开启后，助教页可设置商品讲解状态，观众可查看已讲解的商品片段 </span>
+          </div>
+        </div>
+        <div style="margin-left: 114px">
+          <a-checkbox>讲解中自动推动页面</a-checkbox>
+          <div>开始讲解会同时推送商品卡片并在商品列表置顶商品，结束讲解会同时取消推送和取消置顶</div>
+        </div>
+      </div>
+      <div class="registration-section">
+        <div class="section-header">
+          <div class="section-info">
+            <span class="section-label">推送规则：</span>
+            <a-radio>进推送小卡片</a-radio>
+            <a-radio>进推送大卡片</a-radio>
+            <a-radio checked>推送时选择</a-radio>
+          </div>
+        </div>
+      </div>
+      <div class="registration-section">
+        <div class="section-header">
+          <div class="section-info">
+            <span class="section-label">商品序号规则：</span>
+            <a-radio checked>由大到小</a-radio>
+            <a-radio>由小到大</a-radio>
+          </div>
+        </div>
+      </div>
+      <div class="registration-section">
+        <div class="section-header">
+          <div class="section-info">
+            <span class="section-label">商品热卖特效：</span>
+            <a-switch v-model:checked="registrationSettings.advancedRegistration" />
+            <span class="section-desc">开启后，统计推送中的商品在各终端的点击次数，并展示“自定义文案xN” 示例 </span>
+          </div>
+        </div>
+      </div>
+      <div class="registration-section">
+        <div class="section-header">
+          <div class="section-info">
+            <span class="section-label">外链购买：</span>
+            <a-radio>直接跳转</a-radio>
+            <a-radio checked>查看商品详情</a-radio>
+          </div>
+        </div>
+        <div style="margin-left: 100px">
+          观众从商品列表、大/小卡片点击“外链购买”商品的封面/标题区域先进商品详情，以便观众不跳出直播间半屏浏览商品信息
+          示例
+        </div>
+      </div>
+      <div class="registration-section">
+        <div class="section-header">
+          <div class="section-info">
+            <span class="section-label">点击数据上报：</span>
+            <a-button type="link">去设置></a-button>
+          </div>
+        </div>
+        <div style="margin-left: 100px">
+          开启「观看页埋点」和「互动事件上报」，可统计商品点击、下单按钮点击数据 示例
+        </div>
+      </div>
+    </div>
+
+    <!-- 广告内容 -->
+    <div class="content-section" v-if="activeTab === 'advertisement'">
+      <!-- 广告类型选择 -->
+      <div class="ad-type-tabs">
+        <div
+          v-for="adType in adTypes"
+          :key="adType.key"
+          class="ad-type-tab"
+          :class="{ active: activeAdType === adType.key }"
+          @click="activeAdType = adType.key"
+        >
+          {{ adType.label }}
+        </div>
+      </div>
+      <div class="gg-type">
+        <div>横幅广告：</div>
+        <a-switch v-model:checked="adSettings.banner.enabled" />
+        <div>每5秒，页面将会自动切换广告</div>
+      </div>
+      <div class="gg-type">
+        <div>允许关闭广告：</div>
+        <a-switch v-model:checked="adSettings.banner.allowClose" />
+        <div>关闭后，观众页面广告将不允许自行关闭</div>
+      </div>
+      <a-button type="primary" style="margin: 10px 0">设置广告</a-button>
+      <a-table>
+        <a-table-column title="广告内容" dataIndex="adPosition" />
+        <a-table-column title="广告类型" dataIndex="adContent" />
+        <a-table-column title="跳转链接" dataIndex="action" />
+      </a-table>
+    </div>
+    <!-- 邀请海报内容 -->
+    <yqhb v-if="activeTab === 'shareSettings'" />
+    <!-- 引导关注内容 -->
+    <ydgz v-if="activeTab === 'followGuide'" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { message } from "ant-design-vue";
 import { reactive, ref } from "vue";
+import ydgz from "./ydgz.vue";
+import yqhb from "./yqhb.vue";
 const tabs = ref([
   { key: "reward", label: "打赏" },
   { key: "registration", label: "报名观看" },
@@ -241,6 +348,41 @@ const tabs = ref([
   { key: "redPacketStyle", label: "红包样式" },
 ]);
 const activeTab = ref("reward");
+
+// 广告类型
+const adTypes = ref([
+  { key: "banner", label: "横幅广告" },
+  { key: "image", label: "图标广告" },
+  { key: "video", label: "片头广告" },
+  { key: "popup", label: "弹窗广告" },
+]);
+const activeAdType = ref("banner");
+
+// 广告设置
+const adSettings = reactive({
+  banner: {
+    enabled: true,
+    allowClose: true,
+    interval: 5, // 刷新间隔（秒）
+    content: "",
+    linkUrl: "",
+  },
+  image: {
+    enabled: false,
+    content: "",
+    linkUrl: "",
+  },
+  video: {
+    enabled: false,
+    content: "",
+    linkUrl: "",
+  },
+  popup: {
+    enabled: false,
+    content: "",
+    linkUrl: "",
+  },
+});
 
 // 设置数据
 const settings = reactive({
@@ -305,6 +447,16 @@ const handleConfirmRegistration = () => {
 const handlePreview = () => {
   message.info("预览报名观看页面");
 };
+
+// 处理设置广告
+const handleSetAd = () => {
+  message.info("打开广告设置页面");
+};
+
+// 显示示例
+const showExample = () => {
+  message.info("查看广告示例");
+};
 </script>
 
 <style lang="less" scoped>
@@ -358,10 +510,108 @@ const handlePreview = () => {
   }
 
   .content-section {
-    background: white;
-    border-radius: 8px;
-    padding: 24px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+  }
+
+  // 广告页面样式
+  .ad-type-tabs {
+    display: flex;
+    margin-bottom: 24px;
+    gap: 24px;
+
+    .ad-type-tab {
+      padding: 8px 16px;
+      color: #666;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #1890ff;
+        background: #f0f8ff;
+      }
+
+      &.active {
+        color: #1890ff;
+        background: #e6f7ff;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .ad-content {
+    .ad-setting-section {
+      margin-bottom: 24px;
+
+      .setting-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+        gap: 12px;
+
+        .setting-label {
+          font-size: 14px;
+          color: #333;
+          font-weight: 500;
+          min-width: 100px;
+        }
+
+        .setting-desc {
+          font-size: 12px;
+          color: #666;
+        }
+      }
+    }
+
+    .ad-action-section {
+      margin-bottom: 24px;
+    }
+
+    .ad-content-area {
+      .ad-content-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+
+        .ad-content-item {
+          border: 1px solid #e8e8e8;
+          border-radius: 8px;
+          overflow: hidden;
+          background: #fff;
+
+          .ad-content-header {
+            padding: 16px;
+            background: #f5f5f5;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            border-bottom: 1px solid #e8e8e8;
+          }
+
+          .ad-content-body {
+            padding: 32px 16px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .empty-state {
+              text-align: center;
+
+              .empty-icon {
+                margin-bottom: 16px;
+              }
+
+              .empty-text {
+                font-size: 14px;
+                color: #999;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   .reward-section {
@@ -381,12 +631,6 @@ const handlePreview = () => {
         display: flex;
         align-items: center;
         gap: 12px;
-
-        .section-label {
-          font-size: 16px;
-          font-weight: 600;
-          color: #333;
-        }
       }
     }
 
@@ -517,6 +761,13 @@ const handlePreview = () => {
   // 报名观看样式
   .registration-section {
     margin-bottom: 32px;
+    .section-label {
+      min-width: 100px;
+      text-align: right;
+      font-size: 14px;
+      color: #333;
+      font-weight: 500;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -532,12 +783,6 @@ const handlePreview = () => {
         display: flex;
         align-items: center;
         gap: 12px;
-
-        .section-label {
-          font-size: 14px;
-          color: #333;
-          font-weight: 500;
-        }
 
         .section-desc {
           font-size: 12px;
@@ -687,6 +932,14 @@ const handlePreview = () => {
         grid-template-columns: repeat(6, 1fr);
       }
     }
+
+    .ad-content {
+      .ad-content-area {
+        .ad-content-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    }
   }
 }
 
@@ -742,6 +995,22 @@ const handlePreview = () => {
 .reg-2 {
   .config-item {
     padding-left: 200px;
+  }
+}
+.gg-type {
+  display: flex;
+  margin: 10px 0;
+
+  align-items: center;
+  gap: 20px;
+  div {
+    &:first-child {
+      width: 100px;
+      text-align: right;
+      font-size: 14px;
+      color: #333;
+      font-weight: 500;
+    }
   }
 }
 </style>
