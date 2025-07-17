@@ -1,6 +1,7 @@
 import { message } from "ant-design-vue";
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 // 扩展 AxiosRequestConfig 类型
 declare module "axios" {
@@ -70,7 +71,7 @@ const generateRequestId = (): string => {
 
 // 创建 axios 实例
 const service = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_API_URL,
   timeout: 10000,
 });
 
@@ -90,7 +91,7 @@ service.interceptors.request.use(
     };
 
     // 在请求头中添加 token
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("Admin-Token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

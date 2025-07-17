@@ -1,9 +1,11 @@
 // 用户管理 Store
-import { asyncRoutes, resetRouterState } from "@/router/index";
+import { resetRouterState } from "@/router/index";
 import type { LoginParams, UserInfo } from "@/types/user";
 import { get } from "@/utils/request";
 import { defineStore } from "pinia";
 import type { RouteRecordRaw } from "vue-router";
+
+import { getMenusApi } from "@/api/index";
 
 // 定义状态类型
 interface UserState {
@@ -110,12 +112,18 @@ export const useUserStore = defineStore("user", {
         return [];
       }
     },
-    generateRoutes(): Promise<any> {
-      return new Promise(resolve => {
-        const roles = ["system", "system-user", "system-role", "system-department"];
-        const dynamicRoutes = filterAsyncRoutes(asyncRoutes, roles);
-        resolve(dynamicRoutes);
-      });
+    async generateRoutes(): Promise<any> {
+      try {
+        const res = await getMenusApi({ menuId: "2001" });
+
+        const roles = getAsycMenus(res?.children || []);
+        console.log(roles, "33333333");
+        return [];
+      } catch (error) {
+        console.error("获取菜单路由失败:", error);
+        // 返回空数组而不是抛出错误，避免路由守卫重定向到登录页
+        return [];
+      }
     },
     // 重置状态
     $reset(): void {
@@ -145,4 +153,13 @@ const hasPermission = (route: RouteRecordRaw, roles: string[]): boolean => {
     return roles.includes(route.name);
   }
   return false;
+};
+const getAsycMenus = list => {
+  return list.reduce((acc: any[], item: any) => {
+    if (item?.children && item?.children?.length > 0) {
+      acc.push(...getAsycMenus(item.children));
+    }
+    acc.push(item.routeName);
+    return acc;
+  }, []) as any[];
 };

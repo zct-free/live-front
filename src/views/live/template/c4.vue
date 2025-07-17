@@ -334,8 +334,8 @@
 <script setup lang="ts">
 import { message } from "ant-design-vue";
 import { reactive, ref } from "vue";
-import ydgz from "./ydgz.vue";
-import yqhb from "./yqhb.vue";
+import ydgz from "./components/ydgz.vue";
+import yqhb from "./components/yqhb.vue";
 const tabs = ref([
   { key: "reward", label: "打赏" },
   { key: "registration", label: "报名观看" },

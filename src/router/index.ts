@@ -1,5 +1,6 @@
 import AdminLayout from "@/layouts/AdminLayout.vue"; // Import the main layout
 import { useUserStore } from "@/store/user"; // Import user store
+import Cookies from "js-cookie"; // Import js-cookie for cookie management
 import type { RouteRecordRaw } from "vue-router"; // Type import
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -34,32 +35,79 @@ const routes: Array<RouteRecordRaw> = [
               icon: "UserOutlined",
             },
           },
-          {
-            path: "list-course",
-            name: "list-course",
-            component: () => import("@/views/live/liveList/index3.vue"), // Ensure this view exists
-            meta: {
-              title: "直播课程表",
-              icon: "UserOutlined",
-            },
-          },
-          {
-            path: "list-sensitivewords",
-            name: "list-sensitivewords",
-            component: () => import("@/views/live/liveList/index4.vue"), // Ensure this view exists
-            meta: {
-              title: "直播敏感词",
-              icon: "UserOutlined",
-            },
-          },
+          // {
+          //   path: "list-course",
+          //   name: "list-course",
+          //   component: () => import("@/views/live/liveList/index3.vue"), // Ensure this view exists
+          //   meta: {
+          //     title: "直播课程表",
+          //     icon: "UserOutlined",
+          //   },
+          // },
+          // {
+          //   path: "list-sensitivewords",
+          //   name: "list-sensitivewords",
+          //   component: () => import("@/views/live/liveList/index4.vue"), // Ensure this view exists
+          //   meta: {
+          //     title: "直播敏感词",
+          //     icon: "UserOutlined",
+          //   },
+          // },
           {
             path: "live-channel",
             name: "live-channel",
-            component: () => import("@/views/live/template/index.vue"), // Ensure this view exists
             meta: {
               title: "直播频道",
               icon: "UserOutlined",
             },
+            redirect: "live-channel/live-room",
+            children: [
+              {
+                path: "live-room",
+                name: "live-room",
+                component: () => import("@/views/live/template/c1.vue"),
+                meta: {
+                  title: "聊天室设置",
+                  icon: "UserOutlined",
+                },
+              },
+              {
+                path: "live-gky",
+                name: "live-gky",
+                component: () => import("@/views/live/template/c2.vue"),
+                meta: {
+                  title: "观看页设置",
+                  icon: "UserOutlined",
+                },
+              },
+              {
+                path: "live-hgfk",
+                name: "live-hgfk",
+                component: () => import("@/views/live/template/c3.vue"),
+                meta: {
+                  title: "合规风控",
+                  icon: "UserOutlined",
+                },
+              },
+              {
+                path: "live-zbhd",
+                name: "live-zbhd",
+                component: () => import("@/views/live/template/c4.vue"),
+                meta: {
+                  title: "直播互动",
+                  icon: "UserOutlined",
+                },
+              },
+              {
+                path: "live-bfqsz",
+                name: "live-bfqsz",
+                component: () => import("@/views/live/template/c5.vue"),
+                meta: {
+                  title: "播放器设置",
+                  icon: "UserOutlined",
+                },
+              },
+            ],
           },
         ],
       },
@@ -349,34 +397,24 @@ router.beforeEach(async (to, _from, next) => {
   //   return;
   // }
 
-  const hasToken = localStorage.getItem("token");
-  // 如果访问的是登录页面
-  if (to.path === "/login") {
-    if (hasToken) {
-      // 已经有token，重定向到首页
-      next({ path: "/" });
-    } else {
-      // 没有token，允许访问登录页
-      next();
-    }
-    return;
-  }
+  const hasToken = Cookies.get("Admin-Token");
 
   if (hasToken) {
     const userStore = useUserStore();
     try {
       if (!hasAddedRoutes) {
-        // const accessRoutes = await (userStore as any).generateRoutes();
+        const accessRoutes = await (userStore as any).generateRoutes();
+        // console.log("生成路由完成:", accessRoutes);
         // addAsyncRoutes(accessRoutes);
-        // hasAddedRoutes = true;
+        // console.log(accessRoutes, "accessRoutes");
+        hasAddedRoutes = true;
         next({ ...to, replace: true });
       } else {
         next();
       }
     } catch (error) {
-      localStorage.removeItem("token");
       hasAddedRoutes = false; // 重置标记
-      next({ path: "/login", replace: true });
+      next();
     }
   } else {
     hasAddedRoutes = false; // 重置标记
@@ -390,9 +428,3 @@ router.beforeEach(async (to, _from, next) => {
 });
 
 export default router;
-
-const addAsyncRoutes = (routes: Array<RouteRecordRaw>) => {
-  routes.forEach(route => {
-    router.addRoute(route);
-  });
-};
