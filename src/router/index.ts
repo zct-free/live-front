@@ -261,7 +261,6 @@ router.beforeEach(async (to, _from, next) => {
   // }
 
   const hasToken = Cookies.get("Admin-Token");
-
   if (hasToken) {
     const userStore = useUserStore();
     try {
@@ -270,9 +269,21 @@ router.beforeEach(async (to, _from, next) => {
         addAsyncRoutes(accessRoutes);
         await new Promise(resolve => setTimeout(resolve, 100));
         hasAddedRoutes = true;
-        next({ ...to, replace: true });
+        // 处理动态路由后，判断目标路由是否存在
+        const matched = router.resolve(to).matched;
+        if (!matched.length) {
+          next({ name: "NotFound" });
+        } else {
+          next({ ...to, replace: true });
+        }
       } else {
-        next();
+        // 处理目标路由不存在的情况
+        const matched = router.resolve(to).matched;
+        if (!matched.length) {
+          next({ name: "NotFound" });
+        } else {
+          next();
+        }
       }
     } catch (error) {
       hasAddedRoutes = false; // 重置标记
@@ -284,7 +295,7 @@ router.beforeEach(async (to, _from, next) => {
     if (to.path === "/:pathMatch(.*)*") {
       next({ name: "NotFound" });
     } else {
-      next();
+      next({ path: "/login" });
     }
   }
 });

@@ -154,9 +154,8 @@ const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]): RouteReco
 };
 const hasPermission = (route: RouteRecordRaw, roles: string[]): boolean => {
   if (route.name && typeof route.name === "string") {
-    return roles.includes(route.name);
+    return roles.includes(route.name) || route.name === "NotFound";
   }
-  if (route.name === "NotFound") return true;
   return false;
 };
 const getAsycMenus = (list: Array<any>) => {
