@@ -1,18 +1,18 @@
 // 用户管理 Store
-import { resetRouterState } from "@/router/index";
+import { asyncRoutes, resetRouterState } from "@/router/index";
 import type { LoginParams, UserInfo } from "@/types/user";
 import { get } from "@/utils/request";
 import { defineStore } from "pinia";
 import type { RouteRecordRaw } from "vue-router";
 
-import { getMenusApi } from "@/api/index";
-
+import { getMenusApi } from "@/api/index"; // 引入获取菜单的API
 // 定义状态类型
 interface UserState {
   token: string;
   userInfo: UserInfo | null;
   loading: boolean;
   permissions: string[];
+  routes: RouteRecordRaw[];
 }
 
 export const useUserStore = defineStore("user", {
@@ -21,6 +21,7 @@ export const useUserStore = defineStore("user", {
     userInfo: null,
     loading: false,
     permissions: [],
+    routes: [],
   }),
 
   getters: {
@@ -29,6 +30,9 @@ export const useUserStore = defineStore("user", {
     userRole: (state: any) => state.userInfo?.role || "",
     hasPermission: (state: any) => (permission: string) => {
       return state.permissions.indexOf(permission) !== -1;
+    },
+    permissionRoutes: (state: any) => {
+      return state.routes;
     },
   },
   actions: {
@@ -115,10 +119,10 @@ export const useUserStore = defineStore("user", {
     async generateRoutes(): Promise<any> {
       try {
         const res = await getMenusApi({ menuId: "2001" });
-
         const roles = getAsycMenus(res?.children || []);
-        console.log(roles, "33333333");
-        return [];
+        const accessRoutes = filterAsyncRoutes(asyncRoutes || [], roles);
+        (this as any).routes = accessRoutes; // 保存到状态中
+        return accessRoutes;
       } catch (error) {
         console.error("获取菜单路由失败:", error);
         // 返回空数组而不是抛出错误，避免路由守卫重定向到登录页
@@ -152,14 +156,15 @@ const hasPermission = (route: RouteRecordRaw, roles: string[]): boolean => {
   if (route.name && typeof route.name === "string") {
     return roles.includes(route.name);
   }
+  if (route.name === "NotFound") return true;
   return false;
 };
-const getAsycMenus = list => {
+const getAsycMenus = (list: Array<any>) => {
   return list.reduce((acc: any[], item: any) => {
     if (item?.children && item?.children?.length > 0) {
       acc.push(...getAsycMenus(item.children));
     }
-    acc.push(item.routeName);
+    acc.push(item.path);
     return acc;
   }, []) as any[];
 };

@@ -1,23 +1,18 @@
 <template>
   <a-layout-sider width="220" class="app-sidebar" v-model:collapsed="collapsed">
     <div class="logo">直播系统</div>
-    <a-menu
-      mode="inline"
-      v-model:selectedKeys="state.selectedKeys"
-      :openKeys="state.openKeys"
-      @openChange="onOpenChange"
-      theme="dark"
-    >
-      <template v-for="route in menuRoutes" :key="route.name">
-        <!-- 递归渲染菜单项 -->
-        <menu-item :route="route" :icons="icons" />
-      </template>
-    </a-menu>
+    <div>
+      <a-menu mode="inline" v-model:selectedKeys="state.selectedKeys" theme="dark" v-if="menuRoutes.length">
+        <template v-for="route in menuRoutes" :key="route.name">
+          <menu-item :route="route" :icons="icons" />
+        </template>
+      </a-menu>
+    </div>
   </a-layout-sider>
 </template>
 
 <script setup lang="ts">
-import AdminLayout from "@/layouts/AdminLayout.vue";
+import { useUserStore } from "@/store/user";
 import {
   AppstoreOutlined,
   EditOutlined,
@@ -31,8 +26,10 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons-vue";
 import { computed, reactive, ref } from "vue";
-import { RouteRecordRaw, useRouter } from "vue-router";
+import { RouteRecordRaw } from "vue-router";
 import MenuItem from "./MenuItem.vue";
+
+const userStore = useUserStore();
 
 // Icons available for dynamic rendering
 const icons: { [key: string]: any } = {
@@ -48,23 +45,13 @@ const icons: { [key: string]: any } = {
   VideoCameraOutlined,
 };
 
-const router = useRouter();
 const collapsed = ref<boolean>(false);
 
 const menuRoutes = computed(() => {
-  const layoutRoute = router.options.routes.find(r => r.path === "/" && r.component === AdminLayout);
-  if (layoutRoute && layoutRoute.children) {
-    return layoutRoute.children
-      .filter((child: RouteRecordRaw) => child.meta && child.meta.title && !child.meta.hiddenFromMenu)
-      .map(child => {
-        // Default icon logic
-        if (child.name === "home" && !child.meta?.icon) {
-          return { ...child, meta: { ...child.meta, icon: "HomeOutlined" } };
-        }
-        return child;
-      });
-  }
-  return [];
+  return (userStore as any).routes.filter((route: RouteRecordRaw) => {
+    // 过滤掉没有标题或被隐藏的路由
+    return route.meta && route.meta.title && !route.meta.hiddenFromMenu;
+  });
 });
 
 const state = reactive({
@@ -72,25 +59,6 @@ const state = reactive({
   selectedKeys: [] as string[],
   rootSubmenuKeys: [] as string[],
 });
-
-// 递归查找当前路由的所有父级路由
-const findParentKeys = (routes: RouteRecordRaw[], targetName: string | symbol, parentKeys: string[] = []): string[] => {
-  for (const route of routes) {
-    if (route.name === targetName) {
-      return parentKeys;
-    }
-    if (route.children && route.children.length > 0) {
-      const found = findParentKeys(route.children, targetName, [...parentKeys, route.name as string]);
-      if (found.length > parentKeys.length) {
-        return found;
-      }
-    }
-  }
-  return parentKeys;
-};
-
-// 处理菜单展开变化
-const onOpenChange = () => {};
 </script>
 
 <style lang="less" scoped>
