@@ -25,11 +25,12 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons-vue";
-import { computed, reactive, ref } from "vue";
-import { RouteRecordRaw } from "vue-router";
+import { computed, reactive, ref, watch } from "vue";
+import { RouteRecordRaw, useRoute } from "vue-router";
 import MenuItem from "./MenuItem.vue";
 
 const userStore = useUserStore();
+const route = useRoute();
 
 // Icons available for dynamic rendering
 const icons: { [key: string]: any } = {
@@ -59,6 +60,40 @@ const state = reactive({
   selectedKeys: [] as string[],
   rootSubmenuKeys: [] as string[],
 });
+
+// 根据当前路由设置菜单选中状态
+const setSelectedKeys = () => {
+  const currentPath = route.path;
+  const currentName = route.name as string;
+
+  // 找到匹配的路由
+  const findMatchedRoute = (routes: RouteRecordRaw[], targetPath: string): string[] => {
+    for (const routeItem of routes) {
+      if (routeItem.path === targetPath || routeItem.name === currentName) {
+        return [routeItem.name as string];
+      }
+      if (routeItem.children) {
+        const childMatch = findMatchedRoute(routeItem.children, targetPath);
+        if (childMatch.length > 0) {
+          return childMatch;
+        }
+      }
+    }
+    return [];
+  };
+
+  const matched = findMatchedRoute(menuRoutes.value, currentPath);
+  state.selectedKeys = matched;
+};
+
+// 监听路由变化，更新菜单选中状态
+watch(
+  () => route.path,
+  () => {
+    setSelectedKeys();
+  },
+  { immediate: true }
+);
 </script>
 
 <style lang="less" scoped>

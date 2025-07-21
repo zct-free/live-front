@@ -1,14 +1,11 @@
 <template>
   <a-breadcrumb class="breadcrumb" separator="/">
-    <a-breadcrumb-item v-for="(item, index) in breadcrumbItems" :key="index">
-      <router-link v-if="item.path && index < breadcrumbItems.length - 1" :to="item.path">
-        <!-- <component v-if="item.icon" :is="item.icon" /> -->
+    <a-breadcrumb-item v-for="(item, index) in breadcrumbItems" :key="item.name">
+      <span v-if="!item.redirect || index === breadcrumbItems.length - 1" class="no-redirect">{{ item.title }}</span>
+      <router-link v-else :to="item.path">
+        <span v-if="item.icon" :is="item.icon" />
         {{ item.title }}
       </router-link>
-      <span v-else>
-        <!-- <component v-if="item.icon" :is="item.icon" /> -->
-        {{ item.title }}
-      </span>
     </a-breadcrumb-item>
   </a-breadcrumb>
 </template>
@@ -27,19 +24,31 @@ const breadcrumbItems = computed(() => {
     title: string;
     path?: string;
     icon?: any;
+    name?: string;
+    redirect?: string | undefined;
   }> = [];
-
+  console.log(matched);
   // 添加当前路由路径
   matched.forEach((match, index) => {
     const isLast = index === matched.length - 1;
+    // 构建正确的绝对路径
+    let fullPath = match.redirect ? match.redirect : match.path.startsWith("/") ? match.path : "/" + match.path;
+
     items.push({
-      title: isLast ? (route?.query?.title ?? (match.meta.title as string)) : (match.meta.title as string),
-      path: isLast || index === 0 ? undefined : match.path,
+      title: isLast
+        ? typeof route?.query?.title === "string"
+          ? route.query.title
+          : (match.meta.title as string)
+        : (match.meta.title as string),
+      path: isLast ? undefined : fullPath,
       icon: match.meta.icon ? getIconComponent(match.meta.icon as string) : undefined,
+      name: match.name as string,
+      redirect: match.redirect,
     });
   });
   return items;
 });
+console.log(breadcrumbItems, "333333333");
 
 // 获取图标组件
 const getIconComponent = (iconName: string) => {
@@ -57,9 +66,15 @@ const getIconComponent = (iconName: string) => {
   line-height: 64px;
   :deep(.ant-breadcrumb-link) {
     color: #fff !important;
+    a {
+      color: inherit;
+    }
   }
   :deep(.ant-breadcrumb-separator) {
     color: #807d7d;
   }
+}
+.no-redirect {
+  color: #1890ff;
 }
 </style>

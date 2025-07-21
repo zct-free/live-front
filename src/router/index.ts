@@ -76,7 +76,7 @@ export const asyncRoutes = [
           title: "直播频道",
           icon: "UserOutlined",
         },
-        redirect: "live-channel/live-room",
+        redirect: "/live-pd/live-channel/live-room",
         children: [
           {
             path: "live-room",
