@@ -13,7 +13,6 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "live-home",
         name: "live-home",
-
         component: () => import("@/views/Home/HomeView.vue"), // Ensure this view exists
         meta: {
           title: "直播首页",
@@ -22,6 +21,14 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
     ],
+  },
+  {
+    path: "/404",
+    name: "NotFound",
+    component: () => import("@/views/NotFound.vue"),
+    meta: {
+      hiddenFromMenu: true,
+    },
   },
 ];
 export const asyncRoutes = [
@@ -231,14 +238,6 @@ export const asyncRoutes = [
       title: "直播统计",
     },
   },
-  {
-    path: "/:pathMatch(.*)*",
-    name: "NotFound",
-    component: () => import("@/views/NotFound.vue"),
-    meta: {
-      hiddenFromMenu: true, // Hide from menu
-    },
-  },
 ];
 
 const router = createRouter({
@@ -254,49 +253,42 @@ export const resetRouterState = () => {
 };
 
 router.beforeEach(async (to, _from, next) => {
-  // // 如果启用了CAS认证，使用CAS路由守卫
-  // if (import.meta.env.VITE_CASE_ENABLED !== "false") {
-  //   await casRouterGuard(to, _from, next);
-  //   return;
-  // }
+  // 如果访问404页面，直接放行
+  if (to.path === "/404") {
+    next();
+    return;
+  }
 
   const hasToken = Cookies.get("Admin-Token");
+
   if (hasToken) {
     const userStore = useUserStore();
     try {
       if (!hasAddedRoutes) {
         const accessRoutes = await (userStore as any).generateRoutes();
         addAsyncRoutes(accessRoutes);
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout(resolve, 30));
         hasAddedRoutes = true;
-        // 处理动态路由后，判断目标路由是否存在
         const matched = router.resolve(to).matched;
-        if (!matched.length) {
-          next({ name: "NotFound" });
-        } else {
-          next({ ...to, replace: true });
+        if (matched.length === 0) {
+          // 如果没有匹配到路由，重定向到404页面
+          next("/404");
+          return;
         }
+        // 动态路由添加后，重新导航到目标路由
+        next({ ...to, replace: true });
       } else {
-        // 处理目标路由不存在的情况
-        const matched = router.resolve(to).matched;
-        if (!matched.length) {
-          next({ name: "NotFound" });
-        } else {
-          next();
-        }
+        // 路由已添加，正常导航
+        next();
       }
     } catch (error) {
-      hasAddedRoutes = false; // 重置标记
-      next();
+      hasAddedRoutes = false;
+      next("/404");
     }
   } else {
-    hasAddedRoutes = false; // 重置标记
-    // 404 页面或其他未授权页面
-    if (to.path === "/:pathMatch(.*)*") {
-      next({ name: "NotFound" });
-    } else {
-      next({ path: "/login" });
-    }
+    hasAddedRoutes = false;
+    // 没有token时跳转到404页面
+    next("/404");
   }
 });
 

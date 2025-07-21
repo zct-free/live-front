@@ -41,11 +41,10 @@ import AppSidebar from "@/components/layout/AppSidebar.vue";
 }
 
 .content-area {
-  height: calc(100vh - 64px);
+  flex: 1;
   overflow-y: auto;
   padding: 20px;
   background: #fff;
-  min-height: 100%;
   width: 100%;
 }
 </style>

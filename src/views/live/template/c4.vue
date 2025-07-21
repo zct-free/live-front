@@ -328,14 +328,19 @@
     <yqhb v-if="activeTab === 'shareSettings'" />
     <!-- 引导关注内容 -->
     <ydgz v-if="activeTab === 'followGuide'" />
+    <!-- 直播预约内容 -->
+    <zbyy v-if="activeTab === 'liveReservation'" />
+    <hbys></hbys>
   </div>
 </template>
 
 <script setup lang="ts">
 import { message } from "ant-design-vue";
 import { reactive, ref } from "vue";
+import { default as hbys, default as Hbys } from "./components/hbys.vue";
 import ydgz from "./components/ydgz.vue";
 import yqhb from "./components/yqhb.vue";
+import zbyy from "./components/zbyy.vue";
 const tabs = ref([
   { key: "reward", label: "打赏" },
   { key: "registration", label: "报名观看" },
