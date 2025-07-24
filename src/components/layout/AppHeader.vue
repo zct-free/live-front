@@ -4,7 +4,7 @@
       <BreadCrumb />
 
       <div class="user-info">
-        <div>你好，{{ (userStore as any).userInfo?.name || "" }}</div>
+        <div>你好，测试用户</div>
         <!-- <div @click="handleLogout" class="logout"><LogoutOutlined class="logout-icon" />安全退出</div> -->
       </div>
 
