@@ -126,16 +126,6 @@
                   @change="handleMemberPageChange"
                 />
               </div>
-              <div class="members-pagination">
-                <a-pagination
-                  v-model:current="membersPagination.current"
-                  :total="membersPagination.total"
-                  :pageSize="membersPagination.pageSize"
-                  :showTotal="(total: number) => `共 ${total} 条`"
-                  show-quick-jumper
-                  @change="handleMemberPageChange"
-                />
-              </div>
             </div>
           </div>
         </div>
