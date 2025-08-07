@@ -19,6 +19,8 @@ VERSION=$(grep '"version"' package.json 2>/dev/null | sed 's/.*"version": *"\([^
 ARCHIVE_NAME="${PROJECT_NAME}.tar.gz"
 
 # 服务器配置
+SERVER_PORT="2618"  # SSH连接端口
+
 case $ENV in
     "stage")
         SERVER_HOST="140.210.90.103"
@@ -73,7 +75,8 @@ check_command() {
 log_info "开始部署 ruoyi 前端项目"
 log_info "目标环境: $ENV"
 log_info "项目版本: $VERSION"
-log_info "目标服务器: $SERVER_USER@$SERVER_HOST:$SERVER_PATH"
+log_info "目标服务器: $SERVER_USER@$SERVER_HOST:$SERVER_PORT"
+log_info "部署路径: $SERVER_PATH"
 log_info "本地压缩包: $ARCHIVE_NAME"
 log_info "远程文件名: $REMOTE_FILENAME"
 
@@ -143,7 +146,7 @@ log_success "压缩包创建完成: $ARCHIVE_NAME ($ARCHIVE_SIZE)"
 log_info "上传文件到服务器..."
 log_info "本地文件: $ARCHIVE_NAME"
 log_info "远程文件: $REMOTE_FILENAME"
-scp "$ARCHIVE_NAME" "$SERVER_USER@$SERVER_HOST:$SERVER_PATH/$REMOTE_FILENAME" || {
+scp -P "$SERVER_PORT" "$ARCHIVE_NAME" "$SERVER_USER@$SERVER_HOST:$SERVER_PATH/$REMOTE_FILENAME" || {
     log_error "文件上传失败"
     rm -f "$ARCHIVE_NAME"
     exit 1
@@ -151,7 +154,7 @@ scp "$ARCHIVE_NAME" "$SERVER_USER@$SERVER_HOST:$SERVER_PATH/$REMOTE_FILENAME" ||
 
 # 9. 远程部署（已移除备份命令）
 log_info "执行远程部署..."
-ssh "$SERVER_USER@$SERVER_HOST" "
+ssh -p "$SERVER_PORT" "$SERVER_USER@$SERVER_HOST" "
     cd $SERVER_PATH && \
     echo '解压新版本...' && \
     tar -zxf $REMOTE_FILENAME && \
@@ -179,7 +182,7 @@ fi
 log_success "🎉 部署完成！"
 log_info "环境: $ENV"
 log_info "版本: $VERSION"
-log_info "服务器: $SERVER_USER@$SERVER_HOST"
+log_info "服务器: $SERVER_USER@$SERVER_HOST:$SERVER_PORT"
 log_info "部署路径: $SERVER_PATH"
 log_info "本地文件: $ARCHIVE_NAME"
 log_info "远程文件: $REMOTE_FILENAME"
