@@ -13,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "live-home",
         name: "live-home",
-        component: () => import("@/views/Home/HomeView.vue"), // Ensure this view exists
+        component: () => import("@/views/Home/index.vue"), // Ensure this view exists
         meta: {
           title: "直播首页",
           icon: "HomeOutlined",
