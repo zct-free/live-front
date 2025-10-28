@@ -91,7 +91,7 @@
       </div>
     </div>
     <a-tabs>
-      <a-tab-pane key="1" tab="日期汇总">
+      <a-tab-pane key="11" tab="日期汇总">
         <a-radio-group v-model:value="rqhz" button-style="solid">
           <a-radio-button value="a">列表</a-radio-button>
           <a-radio-button value="b">图表</a-radio-button>
@@ -118,6 +118,86 @@
               viewerCount: '2人',
               avgViewDuration: '3分钟',
               avgViewCount: '1次',
+            },
+            {
+              date: '2025-07-15',
+              viewDuration: '8分钟',
+              viewCount: '3次',
+              viewerCount: '3人',
+              avgViewDuration: '4分钟',
+              avgViewCount: '1次',
+            },
+            {
+              date: '2025-07-16',
+              viewDuration: '10分钟',
+              viewCount: '5次',
+              viewerCount: '4人',
+              avgViewDuration: '5分钟',
+              avgViewCount: '2次',
+            },
+            {
+              date: '2025-07-17',
+              viewDuration: '7分钟',
+              viewCount: '3次',
+              viewerCount: '3人',
+              avgViewDuration: '3分钟',
+              avgViewCount: '1次',
+            },
+            {
+              date: '2025-07-18',
+              viewDuration: '12分钟',
+              viewCount: '6次',
+              viewerCount: '5人',
+              avgViewDuration: '6分钟',
+              avgViewCount: '2次',
+            },
+            {
+              date: '2025-07-19',
+              viewDuration: '5分钟',
+              viewCount: '2次',
+              viewerCount: '2人',
+              avgViewDuration: '3分钟',
+              avgViewCount: '1次',
+            },
+            {
+              date: '2025-07-20',
+              viewDuration: '9分钟',
+              viewCount: '4次',
+              viewerCount: '4人',
+              avgViewDuration: '4分钟',
+              avgViewCount: '1次',
+            },
+            {
+              date: '2025-07-21',
+              viewDuration: '11分钟',
+              viewCount: '5次',
+              viewerCount: '5人',
+              avgViewDuration: '5分钟',
+              avgViewCount: '2次',
+            },
+            {
+              date: '2025-07-22',
+              viewDuration: '6分钟',
+              viewCount: '3次',
+              viewerCount: '3人',
+              avgViewDuration: '3分钟',
+              avgViewCount: '1次',
+            },
+            {
+              date: '2025-07-23',
+              viewDuration: '8分钟',
+              viewCount: '4次',
+              viewerCount: '4人',
+              avgViewDuration: '4分钟',
+              avgViewCount: '1次',
+            },
+            {
+              date: '2025-07-24',
+              viewDuration: '10分钟',
+              viewCount: '5次',
+              viewerCount: '5人',
+              avgViewDuration: '5分钟',
+              avgViewCount: '2次',
             },
           ]"
           :pagination="false"
@@ -247,7 +327,10 @@
           <!-- 表格区域 -->
           <div style="flex: 1.2">
             <a-table
-              :dataSource="[{ terminal: '湖北', viewCount: 1, percent: '50%' }]"
+              :dataSource="[{ terminal: '湖北', viewCount: 1, percent: '50%' },
+                            { terminal: '广东', viewCount: 0.5, percent: '25%' },
+                            { terminal: '浙江', viewCount: 0.5, percent: '25%' },
+              ]"
               :pagination="false"
               rowKey="terminal"
               bordered
@@ -319,49 +402,83 @@
     </a-tabs>
     <div class="page-header">
       <h2>互动统计</h2>
-    </div>
-    <a-tabs>
-      <a-tab-pane tab="报名观看记录" key="1">
-        <a-table
-          :data="[]"
-          :columns="[
-            { title: '频道号', dataIndex: 'channel', key: 'channel' },
-            { title: '频道名称', dataIndex: 'channelName', key: 'channelName' },
-            { title: '观看人数', dataIndex: 'viewerCount', key: 'viewerCount' },
-            { title: '报名人数', dataIndex: 'registrationCount', key: 'registrationCount' },
-            { title: '操作', dataIndex: 'registrationCount', key: 'registrationCount' },
-          ]"
-        ></a-table>
-      </a-tab-pane>
-      <a-tab-pane tab="登记观看记录" key="2">
-        <a-table
-          :data="[]"
-          :columns="[
-            { title: '最新记录时间', dataIndex: 'latestRecordTime', key: 'latestRecordTime' },
-            { title: '频道号', dataIndex: 'channel', key: 'channel' },
-            { title: '频道名称', dataIndex: 'viewerCount', key: 'viewerCount' },
-            { title: '报名人数', dataIndex: 'registrationCount', key: 'registrationCount' },
-            { title: '操作', dataIndex: 'registrationCount', key: 'registrationCount' },
-          ]"
-        ></a-table>
-      </a-tab-pane>
-      <a-tab-pane tab="预约观看记录" key="3">
-        <a-radio-group style="margin: 10px 0" v-model:value="rqhz2" button-style="solid">
-          <a-radio-button value="a">微信预约</a-radio-button>
-          <a-radio-button value="b">短信预约</a-radio-button>
-        </a-radio-group>
-        <a-table
-          :data="[]"
-          :columns="[
-            { title: '频道号', dataIndex: 'channel', key: 'channel' },
-            { title: '频道名称', dataIndex: 'viewerCount', key: 'viewerCount' },
-            { title: '预约人数', dataIndex: 'registrationCount', key: 'registrationCount' },
-            { title: '操作', dataIndex: 'registrationCount', key: 'registrationCount' },
-          ]"
-        ></a-table
-      ></a-tab-pane>
-    </a-tabs>
-  </div>
+    <h2>互动统计</h2>
+</div>
+<a-tabs>
+  <a-tab-pane tab="报名观看记录" key="1">
+    <a-table
+      :dataSource="[
+        { channel: 'CH001', channelName: '科技频道', viewerCount: 120, registrationCount: 150, operation: '查看' },
+        { channel: 'CH002', channelName: '教育频道', viewerCount: 89, registrationCount: 110, operation: '查看' },
+        { channel: 'CH003', channelName: '财经频道', viewerCount: 205, registrationCount: 230, operation: '查看' },
+        { channel: 'CH004', channelName: '体育频道', viewerCount: 310, registrationCount: 350, operation: '查看' },
+        { channel: 'CH005', channelName: '娱乐频道', viewerCount: 420, registrationCount: 500, operation: '查看' },
+        { channel: 'CH006', channelName: '健康频道', viewerCount: 78, registrationCount: 95, operation: '查看' },
+        { channel: 'CH007', channelName: '美食频道', viewerCount: 156, registrationCount: 180, operation: '查看' },
+        { channel: 'CH008', channelName: '旅游频道', viewerCount: 92, registrationCount: 115, operation: '查看' },
+        { channel: 'CH009', channelName: '汽车频道', viewerCount: 189, registrationCount: 210, operation: '查看' },
+        { channel: 'CH010', channelName: '时尚频道', viewerCount: 135, registrationCount: 160, operation: '查看' }
+      ]"
+      :columns="[
+        { title: '频道号', dataIndex: 'channel', key: 'channel' },
+        { title: '频道名称', dataIndex: 'channelName', key: 'channelName' },
+        { title: '观看人数', dataIndex: 'viewerCount', key: 'viewerCount' },
+        { title: '报名人数', dataIndex: 'registrationCount', key: 'registrationCount' },
+        { title: '操作', dataIndex: 'operation', key: 'operation' },
+      ]"
+    ></a-table>
+  </a-tab-pane>
+  <a-tab-pane tab="登记观看记录" key="2">
+    <a-table
+      :dataSource="[
+        { latestRecordTime: '2025-10-28 09:15', channel: 'CH001', channelName: '科技频道', registrationCount: 120, operation: '详情' },
+        { latestRecordTime: '2025-10-28 10:30', channel: 'CH002', channelName: '教育频道', registrationCount: 89, operation: '详情' },
+        { latestRecordTime: '2025-10-28 11:45', channel: 'CH003', channelName: '财经频道', registrationCount: 205, operation: '详情' },
+        { latestRecordTime: '2025-10-28 13:00', channel: 'CH004', channelName: '体育频道', registrationCount: 310, operation: '详情' },
+        { latestRecordTime: '2025-10-28 14:20', channel: 'CH005', channelName: '娱乐频道', registrationCount: 420, operation: '详情' },
+        { latestRecordTime: '2025-10-28 15:10', channel: 'CH006', channelName: '健康频道', registrationCount: 78, operation: '详情' },
+        { latestRecordTime: '2025-10-28 16:30', channel: 'CH007', channelName: '美食频道', registrationCount: 156, operation: '详情' },
+        { latestRecordTime: '2025-10-28 17:45', channel: 'CH008', channelName: '旅游频道', registrationCount: 92, operation: '详情' },
+        { latestRecordTime: '2025-10-28 18:20', channel: 'CH009', channelName: '汽车频道', registrationCount: 189, operation: '详情' },
+        { latestRecordTime: '2025-10-28 19:50', channel: 'CH010', channelName: '时尚频道', registrationCount: 135, operation: '详情' }
+      ]"
+      :columns="[
+        { title: '最新记录时间', dataIndex: 'latestRecordTime', key: 'latestRecordTime' },
+        { title: '频道号', dataIndex: 'channel', key: 'channel' },
+        { title: '频道名称', dataIndex: 'channelName', key: 'channelName' },
+        { title: '登记人数', dataIndex: 'registrationCount', key: 'registrationCount' },
+        { title: '操作', dataIndex: 'operation', key: 'operation' },
+      ]"
+    ></a-table>
+  </a-tab-pane>
+  <a-tab-pane tab="预约观看记录" key="3">
+    <a-radio-group style="margin: 10px 0" v-model:value="rqhz2" button-style="solid">
+      <a-radio-button value="a">微信预约</a-radio-button>
+      <a-radio-button value="b">短信预约</a-radio-button>
+    </a-radio-group>
+    <a-table
+      :dataSource="[
+        { channel: 'CH001', channelName: '科技频道', reservationCount: 180, operation: '导出' },
+        { channel: 'CH002', channelName: '教育频道', reservationCount: 150, operation: '导出' },
+        { channel: 'CH003', channelName: '财经频道', reservationCount: 220, operation: '导出' },
+        { channel: 'CH004', channelName: '体育频道', reservationCount: 380, operation: '导出' },
+        { channel: 'CH005', channelName: '娱乐频道', reservationCount: 450, operation: '导出' },
+        { channel: 'CH006', channelName: '健康频道', reservationCount: 120, operation: '导出' },
+        { channel: 'CH007', channelName: '美食频道', reservationCount: 210, operation: '导出' },
+        { channel: 'CH008', channelName: '旅游频道', reservationCount: 160, operation: '导出' },
+        { channel: 'CH009', channelName: '汽车频道', reservationCount: 250, operation: '导出' },
+        { channel: 'CH010', channelName: '时尚频道', reservationCount: 190, operation: '导出' }
+      ]"
+      :columns="[
+        { title: '频道号', dataIndex: 'channel', key: 'channel' },
+        { title: '频道名称', dataIndex: 'channelName', key: 'channelName' },
+        { title: '预约人数', dataIndex: 'reservationCount', key: 'reservationCount' },
+        { title: '操作', dataIndex: 'operation', key: 'operation' },
+      ]"
+    ></a-table>
+  </a-tab-pane>
+</a-tabs>
+</div>
 </template>
 
 <script setup lang="ts">
