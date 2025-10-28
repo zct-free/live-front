@@ -317,6 +317,22 @@ const loadData = async () => {
         banMethod: "auto",
         banTime: "2024-01-24 17:20:00",
       },
+      {
+        id: "11",
+        channelId: "CH007",
+        userId: "U012345",
+        userNickname: "陈十三",
+        banMethod: "auto",
+        banTime: "2024-01-24 17:20:00",
+      },
+      {
+        id: "12",
+        channelId: "CH008",
+        userId: "U012345",
+        userNickname: "陈十四",
+        banMethod: "auto",
+        banTime: "2024-01-24 17:20:00",
+      },
     ];
 
     tableData.value = mockData;

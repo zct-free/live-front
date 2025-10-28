@@ -67,6 +67,66 @@ const tableData = ref([
     viewCount: 5,
     viewDuration: 60,
   },
+    {
+    userId: "789013",
+    username: "张三",
+    viewCount: 10,
+    viewDuration: 80,
+  },
+    {
+    userId: "789014",
+    username: "李四",
+    viewCount: 6,
+    viewDuration: 70,
+  },
+    {
+    userId: "789014",
+    username: "王五",
+    viewCount: 8,
+    viewDuration: 90,
+  },
+    {
+    userId: "789015",
+    username: "赵六",
+    viewCount: 5,
+    viewDuration: 50,
+  },
+    {
+    userId: "789016",
+    username: "孙七",
+    viewCount: 9,
+    viewDuration: 100,
+  },
+    {
+    userId: "789017",
+    username: "小李",
+    viewCount: 3,
+    viewDuration: 60,
+  },
+    {
+    userId: "789018",
+    username: "小孙",
+    viewCount: 5,
+    viewDuration: 60,
+  },
+    {
+    userId: "789019",
+    username: "小花",
+    viewCount: 4,
+    viewDuration: 60,
+  },
+    {
+    userId: "789022",
+    username: "用户B",
+    viewCount: 5,
+    viewDuration: 60,
+  },
+    {
+    userId: "789010",
+    username: "李华",
+    viewCount: 5,
+    viewDuration: 60,
+  },
 ]);
 </script>
 <style scoped lang="less">
