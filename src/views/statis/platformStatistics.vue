@@ -263,11 +263,23 @@
               </span>
             </div>
             <!-- 简单饼图模拟 -->
-            <svg width="320" height="320" viewBox="0 0 320 320">
-              <!-- 安卓（左半部分，蓝色） -->
-              <path d="M160,160 L160,0 A160,160 0 0,0 0,160 Z" fill="#6495fa" />
-              <!-- Chrome（右半部分，绿色） -->
-              <path d="M160,160 L0,160 A160,160 0 0,1 320,160 Z" fill="#5adbb0" />
+            <svg width="320" height="320" viewBox="0 0 320 320" role="img" aria-label="上半蓝色下半绿色的圆">
+              <defs>
+              <clipPath id="topHalf">
+                <rect x="0" y="0" width="320" height="160" />
+              </clipPath>
+              <clipPath id="bottomHalf">
+                <rect x="0" y="160" width="320" height="160" />
+              </clipPath>
+              </defs>
+
+              <!-- 整体圆形（上半部分使用蓝色，裁剪显示上半） -->
+              <circle cx="160" cy="160" r="140" fill="#6495fa" clip-path="url(#topHalf)" />
+              <!-- 整体圆形（下半部分使用绿色，裁剪显示下半） -->
+              <circle cx="160" cy="160" r="140" fill="#5adbb0" clip-path="url(#bottomHalf)" />
+
+              <!-- 可选：边框 -->
+              <circle cx="160" cy="160" r="140" fill="none" stroke="#e6eefc" stroke-width="2" />
             </svg>
             <div
               style="
