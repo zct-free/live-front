@@ -264,8 +264,10 @@
             </div>
             <!-- 简单饼图模拟 -->
             <svg width="320" height="320" viewBox="0 0 320 320">
-              <circle r="160" cx="160" cy="160" fill="#5adbb0" />
-              <path d="M160,160 L160,0 A160,160 0 0,1 320,160 Z" fill="#6495fa" />
+              <!-- 安卓（左半部分，蓝色） -->
+              <path d="M160,160 L160,0 A160,160 0 0,0 0,160 Z" fill="#6495fa" />
+              <!-- Chrome（右半部分，绿色） -->
+              <path d="M160,160 L0,160 A160,160 0 0,1 320,160 Z" fill="#5adbb0" />
             </svg>
             <div
               style="
@@ -386,7 +388,10 @@
           <!-- 表格区域 -->
           <div style="flex: 1.2">
             <a-table
-              :dataSource="[{ channel: '6140608', viewerCount: 2 }]"
+              :dataSource="[{ channel: '6140608', viewerCount: 2 },
+                            { channel: '6140609', viewerCount: 5 },
+                            { channel: '6140610', viewerCount: 8 }
+              ]"
               :pagination="false"
               rowKey="channel"
               bordered
@@ -401,7 +406,6 @@
       </a-tab-pane>
     </a-tabs>
     <div class="page-header">
-      <h2>互动统计</h2>
     <h2>互动统计</h2>
 </div>
 <a-tabs>
