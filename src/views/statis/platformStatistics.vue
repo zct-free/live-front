@@ -424,23 +424,28 @@
   <a-tab-pane tab="报名观看记录" key="1">
     <a-table
       :dataSource="[
-        { channel: 'CH001', channelName: '科技频道', viewerCount: 120, registrationCount: 150, operation: '查看' },
-        { channel: 'CH002', channelName: '教育频道', viewerCount: 89, registrationCount: 110, operation: '查看' },
-        { channel: 'CH003', channelName: '财经频道', viewerCount: 205, registrationCount: 230, operation: '查看' },
-        { channel: 'CH004', channelName: '体育频道', viewerCount: 310, registrationCount: 350, operation: '查看' },
-        { channel: 'CH005', channelName: '娱乐频道', viewerCount: 420, registrationCount: 500, operation: '查看' },
-        { channel: 'CH006', channelName: '健康频道', viewerCount: 78, registrationCount: 95, operation: '查看' },
-        { channel: 'CH007', channelName: '美食频道', viewerCount: 156, registrationCount: 180, operation: '查看' },
-        { channel: 'CH008', channelName: '旅游频道', viewerCount: 92, registrationCount: 115, operation: '查看' },
-        { channel: 'CH009', channelName: '汽车频道', viewerCount: 189, registrationCount: 210, operation: '查看' },
-        { channel: 'CH010', channelName: '时尚频道', viewerCount: 135, registrationCount: 160, operation: '查看' }
+        { channel: 'CH001', channelName: '科技频道', viewerCount: 120, registrationCount: 30, operation: '查看' },
+        { channel: 'CH002', channelName: '教育频道', viewerCount: 89, registrationCount: 10, operation: '查看' },
+        { channel: 'CH003', channelName: '财经频道', viewerCount: 205, registrationCount: 30, operation: '查看' },
+        { channel: 'CH004', channelName: '体育频道', viewerCount: 310, registrationCount: 50, operation: '查看' },
+        { channel: 'CH005', channelName: '娱乐频道', viewerCount: 420, registrationCount: 50, operation: '查看' },
+        { channel: 'CH006', channelName: '健康频道', viewerCount: 78, registrationCount: 15, operation: '查看' },
+        { channel: 'CH007', channelName: '美食频道', viewerCount: 156, registrationCount: 18, operation: '查看' },
+        { channel: 'CH008', channelName: '旅游频道', viewerCount: 92, registrationCount: 15, operation: '查看' },
+        { channel: 'CH009', channelName: '汽车频道', viewerCount: 189, registrationCount: 21, operation: '查看' },
+        { channel: 'CH010', channelName: '时尚频道', viewerCount: 135, registrationCount: 16, operation: '查看' }
       ]"
       :columns="[
         { title: '频道号', dataIndex: 'channel', key: 'channel' },
         { title: '频道名称', dataIndex: 'channelName', key: 'channelName' },
         { title: '观看人数', dataIndex: 'viewerCount', key: 'viewerCount' },
         { title: '报名人数', dataIndex: 'registrationCount', key: 'registrationCount' },
-        { title: '操作', dataIndex: 'operation', key: 'operation' },
+        { title: '操作', dataIndex: 'operation',key: 'operation',
+          customRender: ({ text }: { text: string }) => {
+            // 渲染一个带有自定义类的 span
+            return h('span', { style: 'color: #1890ff; cursor: pointer', class: 'operation-link' }, text);
+          },
+        },
       ]"
     ></a-table>
   </a-tab-pane>
@@ -463,7 +468,12 @@
         { title: '频道号', dataIndex: 'channel', key: 'channel' },
         { title: '频道名称', dataIndex: 'channelName', key: 'channelName' },
         { title: '登记人数', dataIndex: 'registrationCount', key: 'registrationCount' },
-        { title: '操作', dataIndex: 'operation', key: 'operation' },
+        { title: '操作', dataIndex: 'operation',key: 'operation',
+          customRender: ({ text }: { text: string }) => {
+            // 渲染一个带有自定义类的 span
+            return h('span', { style: 'color: #1890ff; cursor: pointer', class: 'operation-link' }, text);
+          },
+        },
       ]"
     ></a-table>
   </a-tab-pane>
@@ -489,7 +499,12 @@
         { title: '频道号', dataIndex: 'channel', key: 'channel' },
         { title: '频道名称', dataIndex: 'channelName', key: 'channelName' },
         { title: '预约人数', dataIndex: 'reservationCount', key: 'reservationCount' },
-        { title: '操作', dataIndex: 'operation', key: 'operation' },
+        { title: '操作', dataIndex: 'operation',key: 'operation',
+          customRender: ({ text }: { text: string }) => {
+            // 渲染一个带有自定义类的 span
+            return h('span', { style: 'color: #1890ff; cursor: pointer', class: 'operation-link' }, text);
+          },
+        },
       ]"
     ></a-table>
   </a-tab-pane>
@@ -498,6 +513,7 @@
 </template>
 
 <script setup lang="ts">
+import { h } from 'vue';
 import { QuestionCircleOutlined } from "@ant-design/icons-vue";
 import type { Dayjs } from "dayjs";
 import { onMounted, reactive, ref } from "vue";

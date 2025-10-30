@@ -25,7 +25,7 @@
 
     <!-- 数据表格 -->
     <div class="data-table">
-      <a-table :dataSource="tableData" :columns="columns" :loading="loading">
+      <a-table :dataSource="tableData" :columns="columns" :loading="loading" :pagination="pagination">
         <template #bodyCell="{ column, record }">
           <template v-if="column.key === 'action'">
             <a-button type="link">查看</a-button>
@@ -128,6 +128,16 @@ const tableData = ref([
     viewDuration: 60,
   },
 ]);
+
+// 分页配置
+const pagination = reactive({
+  current: 1,
+  pageSize: 10,
+  total: tableData.value.length,
+  showSizeChanger: true,
+  showQuickJumper: true,
+  showTotal: (total: number) => `共 ${total} 条记录`,
+});
 </script>
 <style scoped lang="less">
 .user-statistics {
@@ -145,4 +155,5 @@ const tableData = ref([
 .data-table {
   margin-top: 24px;
 }
+
 </style>

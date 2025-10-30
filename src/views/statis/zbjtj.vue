@@ -89,8 +89,8 @@
 
       <div class="form-row">
         <div class="form-item">
-          <label>主播</label>
-          <a-input v-model:value="searchForm.anchor" placeholder="请输入主播名称" style="width: 200px" />
+          <label>频道号</label>
+          <a-input v-model:value="searchForm.anchor" placeholder="请输入频道号名称" style="width: 200px" />
         </div>
         <a-button type="primary" @click="handleSearch">搜索</a-button>
       </div>
@@ -136,7 +136,7 @@ const tableData = ref([
     channelId: "6140608",
     channelName: "Spring 知识精讲",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 10,
     viewCount: 5,
     viewDuration: "10分钟",
@@ -149,7 +149,7 @@ const tableData = ref([
     channelId: "6140609",
     channelName: "Java 进阶实战",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 50,
     viewCount: 12,
     viewDuration: "20分钟",
@@ -162,7 +162,7 @@ const tableData = ref([
     channelId: "6140610",
     channelName: "前端 Vue3 精讲",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 5,
     viewCount: 2,
     viewDuration: "6分钟",
@@ -175,7 +175,7 @@ const tableData = ref([
     channelId: "6140611",
     channelName: "美食烹饪技巧",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 5,
     viewCount: 12,
     viewDuration: "6分钟",
@@ -188,7 +188,7 @@ const tableData = ref([
     channelId: "6140612",
     channelName: "健身塑形指南",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 2,
     viewCount: 3,
     viewDuration: "10分钟",
@@ -201,7 +201,7 @@ const tableData = ref([
     channelId: "6140613",
     channelName: "摄影构图教学",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 15,
     viewCount: 12,
     viewDuration: "9分钟",
@@ -214,7 +214,7 @@ const tableData = ref([
     channelId: "6140614",
     channelName: "职场沟通技巧",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 5,
     viewCount: 12,
     viewDuration: "8分钟",
@@ -227,7 +227,7 @@ const tableData = ref([
     channelId: "6140615",
     channelName: "亲子教育分享",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 5,
     viewCount: 12,
     viewDuration: "60分钟",
@@ -240,7 +240,7 @@ const tableData = ref([
     channelId: "6140616",
     channelName: "户外徒步攻略",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 15,
     viewCount: 12,
     viewDuration: "15分钟",
@@ -253,7 +253,7 @@ const tableData = ref([
     channelId: "6140617",
     channelName: "书法入门教程",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 15,
     viewCount: 12,
     viewDuration: "60分钟",
@@ -266,7 +266,7 @@ const tableData = ref([
     channelId: "6140618",
     channelName: "宠物养护知识",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 5,
     viewCount: 2,
     viewDuration: "12分钟",
@@ -279,7 +279,7 @@ const tableData = ref([
     channelId: "6140619",
     channelName: "理财投资入门",
     category: "默认分类",
-    anchor: "-",
+    anchor: "张三",
     visitCount: 5,
     viewCount: 2,
     viewDuration: "60分钟",
@@ -363,7 +363,7 @@ const columns = [
 const pagination = reactive({
   current: 1,
   pageSize: 10,
-  total: 1,
+  total: tableData.value.length,
   showSizeChanger: true,
   showQuickJumper: true,
   showTotal: (total: number) => `共 ${total} 条记录`,
