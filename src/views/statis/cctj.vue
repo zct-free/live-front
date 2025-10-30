@@ -30,7 +30,7 @@
 
     <!-- 数据表格 -->
     <div class="data-table">
-      <a-table :dataSource="tableData" :columns="columns" :pagination="pagination" :loading="loading">
+      <a-table :dataSource="tableData" :columns="columns" :pagination="pagination" :loading="loading" @change="handleTableChange">
         <template #bodyCell="{ column, record }">
           <template v-if="column.key === 'action'">
             <a-button type="link" @click="handleView(record)">查看</a-button>
@@ -44,6 +44,11 @@
 <script setup lang="ts">
 import type { Dayjs } from "dayjs";
 import { onMounted, reactive, ref } from "vue";
+
+const handleTableChange = (pag: any) => {
+  pagination.current = pag.current;
+  pagination.pageSize = pag.pageSize;
+};
 
 // 搜索表单数据
 const searchForm = reactive({

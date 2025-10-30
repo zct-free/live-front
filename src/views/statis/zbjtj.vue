@@ -98,7 +98,7 @@
 
     <!-- 数据表格 -->
     <div class="data-table">
-      <a-table :dataSource="tableData" :columns="columns" :pagination="pagination" :loading="loading">
+      <a-table :dataSource="tableData" :columns="columns" :pagination="pagination" :loading="loading" @change="handleTableChange">
         <template #bodyCell="{ column, record }">
           <template v-if="column.key === 'action'">
             <a-button type="link" @click="handleView(record)">查看</a-button>
@@ -126,6 +126,11 @@ const searchForm = reactive({
   createTime: null as Dayjs | null,
   anchor: "",
 });
+
+const handleTableChange = (pag: any) => {
+  pagination.current = pag.current;
+  pagination.pageSize = pag.pageSize;
+};
 
 // 表格相关数据
 const loading = ref(false);
