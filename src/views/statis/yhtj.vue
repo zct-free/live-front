@@ -54,7 +54,7 @@ const columns = [
   { title: "用户昵称", dataIndex: "username", key: "username" },
   { title: "观看次数", dataIndex: "viewCount", key: "viewCount" },
   { title: "观看总时长", dataIndex: "viewDuration", key: "viewDuration" },
-  { title: "平均观看时长", dataIndex: "viewDuration", key: "viewDuration" },
+  { title: "平均观看时长", dataIndex: "viewDurations", key: "viewDurations" },
   { title: "操作", key: "action", scopedSlots: { customRender: "action" } },
 ];
 const tableData = ref([
@@ -62,73 +62,85 @@ const tableData = ref([
     userId: "U001234",
     username: "用户A",
     viewCount: "10次",
-    viewDuration: "120分钟"
+    viewDuration: "120分钟",
+    viewDurations:"12分钟"
   },
   {
     userId: "U007890",
     username: "用户B",
     viewCount: "5次",
-    viewDuration: "60分钟"
+    viewDuration: "60分钟",
+    viewDurations:"12分钟"
   },
   {
     userId: "U007891",
     username: "张三",
     viewCount: "10次",
-    viewDuration: "80分钟"
+    viewDuration: "80分钟",
+    viewDurations:"8分钟"
   },
   {
     userId: "U007892",
     username: "李四",
     viewCount: "6次",
-    viewDuration: "70分钟"
+    viewDuration: "70分钟",
+    viewDurations:"11分钟"
   },
   {
     userId: "U007893",
     username: "王五",
     viewCount: "8次",
-    viewDuration: "90分钟"
+    viewDuration: "90分钟",
+    viewDurations:"11分钟"
   },
   {
     userId: "U007894",
     username: "赵六",
     viewCount: "5次",
-    viewDuration: "50分钟"
+    viewDuration: "50分钟",
+    viewDurations:"10分钟"
   },
   {
     userId: "U007895",
     username: "孙七",
     viewCount: "9次",
-    viewDuration: "100分钟"
+    viewDuration: "100分钟",
+    viewDurations:"11分钟"
   },
   {
     userId: "U007896",
     username: "小李",
     viewCount: "3次",
-    viewDuration: "60分钟"
+    viewDuration: "60分钟",
+    viewDurations:"20分钟"
   },
   {
     userId: "U007897",
     username: "小孙",
     viewCount: "5次",
-    viewDuration: "60分钟"
+    viewDuration: "60分钟",
+    viewDurations:"12分钟"
   },
   {
     userId: "U007898",
     username: "小花",
     viewCount: "4次",
-    viewDuration: "60分钟"
+    viewDuration: "60分钟",
+    viewDurations:"13分钟"
   },
   {
     userId: "U007899",
     username: "用户B",
     viewCount: "5次",
-    viewDuration: "60分钟"
+    viewDuration: "60分钟",
+    viewDurations:"12分钟"
   },
   {
     userId: "U007810",
     username: "李华",
     viewCount: "5次",
-    viewDuration: "60分钟"
+    viewDuration: "60分钟",
+    viewDurations:"12分钟"
   }
 ]);
 

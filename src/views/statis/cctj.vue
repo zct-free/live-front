@@ -75,8 +75,9 @@ const tableData = ref([
     visitCount: "100分钟",
     viewCount: "50人",
     viewDuration: "100分钟",
-    viewerCount: "100人",
-    maxOnlineCount: "45人"
+    viewerCount: "10人",
+    maxOnlineCount: "45人",
+    maxOnlineTime:"100分钟"
   },
   {
     id: 2,
@@ -87,8 +88,9 @@ const tableData = ref([
     visitCount: "500分钟",
     viewCount: "120人",
     viewDuration: "200分钟",
-    viewerCount: "150人",
-    maxOnlineCount: "22人"
+    viewerCount: "15人",
+    maxOnlineCount: "22人",
+    maxOnlineTime:"100分钟"
   },
   {
     id: 3,
@@ -99,8 +101,9 @@ const tableData = ref([
     visitCount: "50分钟",
     viewCount: "20人",
     viewDuration: "60分钟",
-    viewerCount: "200人",
-    maxOnlineCount: "12人"
+    viewerCount: "20人",
+    maxOnlineCount: "12人",
+    maxOnlineTime:"100分钟"
   },
   {
     id: 4,
@@ -111,8 +114,9 @@ const tableData = ref([
     visitCount: "50分钟",
     viewCount: "120人",
     viewDuration: "60分钟",
-    viewerCount: "200人",
-    maxOnlineCount: "20人"
+    viewerCount: "20人",
+    maxOnlineCount: "20人",
+    maxOnlineTime:"100分钟"
   },
   {
     id: 5,
@@ -123,8 +127,9 @@ const tableData = ref([
     visitCount: "20分钟",
     viewCount: "30人",
     viewDuration: "100分钟",
-    viewerCount: "50人",
-    maxOnlineCount: "17人"
+    viewerCount: "5人",
+    maxOnlineCount: "17人",
+    maxOnlineTime:"100分钟"
   },
   {
     id: 6,
@@ -135,8 +140,9 @@ const tableData = ref([
     visitCount: "150分钟",
     viewCount: "120人",
     viewDuration: "90分钟",
-    viewerCount: "200人",
-    maxOnlineCount: "22人"
+    viewerCount: "20人",
+    maxOnlineCount: "22人",
+    maxOnlineTime:"100分钟"
   },
   {
     id: 7,
@@ -147,8 +153,9 @@ const tableData = ref([
     visitCount: "50分钟",
     viewCount: "120人",
     viewDuration: "80分钟",
-    viewerCount: "200人",
-    maxOnlineCount: "20人"
+    viewerCount: "20人",
+    maxOnlineCount: "20人",
+    maxOnlineTime:"100分钟"
   },
   {
     id: 8,
@@ -159,8 +166,9 @@ const tableData = ref([
     visitCount: "50分钟",
     viewCount: "120人",
     viewDuration: "60分钟",
-    viewerCount: "120人",
-    maxOnlineCount: "20人"
+    viewerCount: "12人",
+    maxOnlineCount: "20人",
+    maxOnlineTime:"100分钟"
   },
   {
     id: 9,
@@ -171,8 +179,9 @@ const tableData = ref([
     visitCount: "150分钟",
     viewCount: "120人",
     viewDuration: "150分钟",
-    viewerCount: "20人",
-    maxOnlineCount: "12人"
+    viewerCount: "2人",
+    maxOnlineCount: "12人",
+    maxOnlineTime:"100分钟"
   },
   {
     id: 10,
@@ -183,8 +192,9 @@ const tableData = ref([
     visitCount: "150分钟",
     viewCount: "120人",
     viewDuration: "60分钟",
-    viewerCount: "50人",
-    maxOnlineCount: "20人"
+    viewerCount: "5人",
+    maxOnlineCount: "20人",
+    maxOnlineTime:"100分钟"
   },
   {
     id: 11,
@@ -195,8 +205,9 @@ const tableData = ref([
     visitCount: "50分钟",
     viewCount: "20人",
     viewDuration: "120分钟",
-    viewerCount: "20人",
-    maxOnlineCount: "12人"
+    viewerCount: "2人",
+    maxOnlineCount: "12人",
+    maxOnlineTime:"100分钟"
   },
   {
     id: 12,
@@ -207,8 +218,9 @@ const tableData = ref([
     visitCount: "50分钟",
     viewCount: "20人",
     viewDuration: "60分钟",
-    viewerCount: "20人",
-    maxOnlineCount: "12人"
+    viewerCount: "2人",
+    maxOnlineCount: "12人",
+    maxOnlineTime:"100分钟"
   }
 ]);
 
@@ -264,8 +276,8 @@ const columns = [
   },
   {
     title: "回看时长",
-    dataIndex: "maxOnlineCount",
-    key: "maxOnlineCount",
+    dataIndex: "maxOnlineTime",
+    key: "maxOnlineTime",
     width: 100,
   },
   {
