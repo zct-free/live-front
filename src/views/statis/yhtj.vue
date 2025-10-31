@@ -59,77 +59,77 @@ const columns = [
 ];
 const tableData = ref([
   {
-    userId: "123456",
+    userId: "U001234",  // 格式调整：前缀U+6位数字
     username: "用户A",
     viewCount: 10,
     viewDuration: 120,
   },
   {
-    userId: "789012",
+    userId: "U007890",  // 格式调整：前缀U+6位数字
     username: "用户B",
     viewCount: 5,
     viewDuration: 60,
   },
-    {
-    userId: "789013",
+  {
+    userId: "U007891",  // 原789013调整为U007891（确保唯一）
     username: "张三",
     viewCount: 10,
     viewDuration: 80,
   },
-    {
-    userId: "789014",
+  {
+    userId: "U007892",  // 原789014调整为U007892（确保唯一）
     username: "李四",
     viewCount: 6,
     viewDuration: 70,
   },
-    {
-    userId: "789014",
+  {
+    userId: "U007893",  // 原重复789014调整为U007893（避免重复）
     username: "王五",
     viewCount: 8,
     viewDuration: 90,
   },
-    {
-    userId: "789015",
+  {
+    userId: "U007894",  // 原789015调整为U007894（确保唯一）
     username: "赵六",
     viewCount: 5,
     viewDuration: 50,
   },
-    {
-    userId: "789016",
+  {
+    userId: "U007895",  // 原789016调整为U007895（确保唯一）
     username: "孙七",
     viewCount: 9,
     viewDuration: 100,
   },
-    {
-    userId: "789017",
+  {
+    userId: "U007896",  // 原789017调整为U007896（确保唯一）
     username: "小李",
     viewCount: 3,
     viewDuration: 60,
   },
-    {
-    userId: "789018",
+  {
+    userId: "U007897",  // 原789018调整为U007897（确保唯一）
     username: "小孙",
     viewCount: 5,
     viewDuration: 60,
   },
-    {
-    userId: "789019",
+  {
+    userId: "U007898",  // 原789019调整为U007898（确保唯一）
     username: "小花",
     viewCount: 4,
     viewDuration: 60,
   },
-    {
-    userId: "789022",
+  {
+    userId: "U007899",  // 原789022调整为U007899（确保唯一）
     username: "用户B",
     viewCount: 5,
     viewDuration: 60,
   },
-    {
-    userId: "789010",
+  {
+    userId: "U007810",  // 原789010调整为U007810（确保唯一）
     username: "李华",
     viewCount: 5,
     viewDuration: 60,
-  },
+  }
 ]);
 
 // 分页配置
