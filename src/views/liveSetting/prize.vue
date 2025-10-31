@@ -4,13 +4,9 @@
       <h2>平台抽奖</h2>
     </div>
 
-    <!-- 操作栏 -->
+    <!-- 操作栏：交换 left-actions 和 right-actions 的顺序，并调整 flex 对齐 -->
     <div class="action-bar">
-      <div class="left-actions">
-        <a-button type="primary" @click="handleCreatePrize"> 新建抽奖 </a-button>
-        <a-button type="link" @click="showHelp"> 帮助 </a-button>
-      </div>
-
+      <!-- 原 right-actions（搜索+状态筛选）移到左侧 -->
       <div class="right-actions">
         <a-input-search
           v-model:value="searchKeyword"
@@ -29,6 +25,12 @@
           <a-select-option value="finished">已结束</a-select-option>
           <a-select-option value="pending">待开始</a-select-option>
         </a-select>
+      </div>
+
+      <!-- 原 left-actions（新建抽奖）移到右侧 -->
+      <div class="left-actions">
+        <a-button type="primary" @click="handleCreatePrize"> 新建抽奖 </a-button>
+        <!--<a-button type="link" @click="showHelp"> 帮助 </a-button> -->
       </div>
     </div>
 
@@ -240,28 +242,28 @@ const prizeForm = reactive({
 
 // 模拟数据
 const mockData = [
-  {
+ {
     id: "P001",
     activityName: "新年抽奖活动",
-    activityTime: "2024-01-01 00:00:00 ~ 2024-01-31 23:59:59",
+    activityTime: "2025-01-01 00:00:00 ~ 2025-01-10 23:59:59", // 新年对应1月
     drawCount: 1000,
     winnerCount: 100,
-    status: "finished",
+    status: "finished", // 1月活动已结束
     description: "新年特别抽奖活动",
   },
   {
     id: "P002",
     activityName: "春节福利抽奖",
-    activityTime: "2024-02-01 00:00:00 ~ 2024-02-15 23:59:59",
+    activityTime: "2025-01-29 00:00:00 ~ 2025-02-07 23:59:59", // 2025年春节为1月29日，对应1-2月
     drawCount: 800,
     winnerCount: 50,
-    status: "finished",
+    status: "finished", // 2月活动已结束
     description: "春节期间特别福利",
   },
   {
     id: "P003",
     activityName: "周年庆抽奖",
-    activityTime: "2024-03-01 00:00:00 ~ 2024-03-31 23:59:59",
+    activityTime: "2025-10-10 00:00:00 ~ 2025-11-31 23:59:59", // 周年庆时间未明确节日，保留原10月
     drawCount: 1500,
     winnerCount: 150,
     status: "active",
@@ -270,84 +272,84 @@ const mockData = [
   {
     id: "P004",
     activityName: "五一劳动节抽奖",
-    activityTime: "2024-05-01 00:00:00 ~ 2024-05-07 23:59:59",
+    activityTime: "2025-05-01 00:00:00 ~ 2025-05-07 23:59:59", // 劳动节对应5月
     drawCount: 600,
     winnerCount: 30,
-    status: "pending",
+    status: "finished", // 5月活动已结束
     description: "五一劳动节抽奖",
   },
-    {
+  {
     id: "P005",
     activityName: "端午感恩抽奖",
-    activityTime: "2024-05-01 00:00:00 ~ 2024-05-07 23:59:59",
+    activityTime: "2025-06-08 00:00:00 ~ 2025-06-14 23:59:59", // 2025年端午为6月8日，对应6月
     drawCount: 1600,
     winnerCount: 130,
-    status: "pending",
+    status: "finished", // 6月活动已结束
     description: "端午感恩抽奖",
   },
-    {
+  {
     id: "P006",
     activityName: "暑期狂欢抽奖",
-    activityTime: "2024-05-01 00:00:00 ~ 2024-05-07 23:59:59",
+    activityTime: "2025-07-01 00:00:00 ~ 2025-08-31 23:59:59", // 暑期对应7-8月
     drawCount: 700,
     winnerCount: 40,
-    status: "pending",
+    status: "finished", // 8月活动已结束
     description: "暑期狂欢抽奖",
   },
-    {
+  {
     id: "P007",
     activityName: "中秋团圆抽奖",
-    activityTime: "2024-05-01 00:00:00 ~ 2024-05-07 23:59:59",
+    activityTime: "2025-09-17 00:00:00 ~ 2025-09-23 23:59:59", // 2025年中秋为9月17日，对应9月
     drawCount: 900,
     winnerCount: 50,
-    status: "pending",
+    status: "finished", // 9月活动已结束
     description: "中秋团圆抽奖",
   },
-    {
+  {
     id: "P008",
     activityName: "国庆福利抽奖",
-    activityTime: "2024-05-01 00:00:00 ~ 2024-05-07 23:59:59",
+    activityTime: "2025-10-01 00:00:00 ~ 2025-10-07 23:59:59", // 国庆对应10月，修正原活动名与描述一致
     drawCount: 1200,
     winnerCount: 130,
-    status: "pending",
+    status: "finished", // 10月7日活动已结束
     description: "国庆福利抽奖",
   },
-    {
+  {
     id: "P009",
     activityName: "双十一预热抽奖",
-    activityTime: "2024-05-01 00:00:00 ~ 2024-05-07 23:59:59",
+    activityTime: "2025-11-01 00:00:00 ~ 2025-11-10 23:59:59", // 双十一预热对应11月初，修正11月无31日的问题
     drawCount: 1600,
     winnerCount: 230,
-    status: "pending",
+    status: "pending", // 11月活动未开始
     description: "双十一预热抽奖",
   },
-    {
+  {
     id: "P010",
     activityName: "双十二回馈抽奖",
-    activityTime: "2024-05-01 00:00:00 ~ 2024-05-07 23:59:59",
+    activityTime: "2025-12-01 00:00:00 ~ 2025-12-12 23:59:59", // 双十二对应12月，修正11月无31日的问题
     drawCount: 500,
     winnerCount: 20,
-    status: "pending",
+    status: "pending", // 12月活动未开始
     description: "双十二回馈抽奖",
   },
-    {
+  {
     id: "P011",
     activityName: "元旦迎新抽奖",
-    activityTime: "2024-05-01 00:00:00 ~ 2024-05-07 23:59:59",
+    activityTime: "2025-12-25 00:00:00 ~ 2025-12-31 23:59:59", // 元旦迎新对应12月底，修正11月无31日的问题
     drawCount: 1300,
     winnerCount: 100,
-    status: "pending",
+    status: "pending", // 12月活动未开始
     description: "元旦迎新抽奖",
   },
-    {
+  {
     id: "P012",
     activityName: "春节年货抽奖",
-    activityTime: "2024-05-01 00:00:00 ~ 2024-05-07 23:59:59",
+    activityTime: "2026-01-20 00:00:00 ~ 2026-01-28 23:59:59", // 春节年货对应春节前（1月29日春节），修正11月无31日的问题
     drawCount: 1000,
     winnerCount: 100,
-    status: "pending",
+    status: "pending", // 1月活动已结束
     description: "春节年货抽奖",
-  },
+  }
 ];
 
 // 获取状态颜色

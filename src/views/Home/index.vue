@@ -11,6 +11,10 @@
           <div>直播分类：</div>
           <a-select v-model:value="liveCategory" style="width: 200px">
             <a-select-option value="全部">全部</a-select-option>
+            <a-select-option value="entertainment">娱乐</a-select-option>
+            <a-select-option value="education">教育</a-select-option>
+            <a-select-option value="sports">体育</a-select-option>
+            <a-select-option value="music">音乐</a-select-option>
           </a-select>
         </div>
         <a-button type="primary" @click="handleQuery">搜索</a-button>
@@ -120,11 +124,11 @@ const dateRange = ref<[Dayjs, Dayjs]>([dayjs("2025-07-08"), dayjs("2025-07-14")]
 const liveCategory = ref("全部");
 // 统计数据
 const statsData = ref([
-  { title: "观看次数", value: 2, suffix: "次", trend: "down", trendIcon: "▼" },
-  { title: "观看时长", value: 6, suffix: "分钟", trend: "down", trendIcon: "▼" },
-  { title: "观看人数", value: 2, suffix: "人", trend: "down", trendIcon: "▼" },
-  { title: "人均观看时长", value: 3, suffix: "分钟", trend: "down", trendIcon: "▼" },
-  { title: "人均观看次数", value: 1, suffix: "次", trend: "down", trendIcon: "▼" },
+  { title: "观看次数", value: 32000, suffix: "次", trend: "down", trendIcon: "▼" },
+  { title: "观看时长", value: 186000, suffix: "分钟", trend: "down", trendIcon: "▼" },
+  { title: "观看人数", value: 3900, suffix: "人", trend: "down", trendIcon: "▼" },
+  { title: "人均观看时长", value: 47, suffix: "分钟", trend: "down", trendIcon: "▼" },
+  { title: "人均观看次数", value: 8, suffix: "次", trend: "down", trendIcon: "▼" },
 ]);
 
 // 状态数据
@@ -170,7 +174,7 @@ const initTrendChart = () => {
     xAxis: {
       type: "category",
       boundaryGap: false,
-      data: ["2025-07-08", "2025-07-09", "2025-07-10", "2025-07-11", "2025-07-12", "2025-07-13", "2025-07-14"],
+      data: ["2025-10-18", "2025-10-19", "2025-10-20", "2025-10-21", "2025-10-22", "2025-10-23", "2025-10-24"],
     },
     yAxis: {
       type: "value",
@@ -264,9 +268,7 @@ const initCategoryChart = () => {
         type: "pie",
         radius: "50%",
         data: [
-          { value: 50, name: "平板", itemStyle: { color: "#ff4d4f" } },
-          { value: 30, name: "移动端", itemStyle: { color: "#1890ff" } },
-          { value: 20, name: "pc端", itemStyle: { color: "#52c41a" } },
+          { value: 100, name: "移动端", itemStyle: { color: "#1890ff" } }
         ],
         emphasis: {
           itemStyle: {
@@ -331,7 +333,7 @@ const initUsageChart = () => {
     },
     xAxis: {
       type: "category",
-      data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+      data: ["10-27", "10-28", "10-29", "10-30", "10-31", "11-01", "10-02"],
     },
     yAxis: {
       type: "value",

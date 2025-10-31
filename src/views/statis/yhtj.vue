@@ -29,7 +29,6 @@
         <template #bodyCell="{ column, record }">
           <template v-if="column.key === 'action'">
             <a-button type="link">查看</a-button>
-            <a-button type="link">下载</a-button>
           </template>
         </template>
       </a-table>
@@ -56,7 +55,6 @@ const columns = [
   { title: "观看次数", dataIndex: "viewCount", key: "viewCount" },
   { title: "观看总时长", dataIndex: "viewDuration", key: "viewDuration" },
   { title: "平均观看时长", dataIndex: "viewDuration", key: "viewDuration" },
-
   { title: "操作", key: "action", scopedSlots: { customRender: "action" } },
 ];
 const tableData = ref([

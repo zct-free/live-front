@@ -21,15 +21,15 @@
             </template>
           </a-input>
         </a-form-item>
-
-        <a-form-item label="场次开播时间">
+        <!-- <a-form-item label="场次开播时间">
           <a-range-picker
             v-model:value="searchForm.broadcastTime"
             format="YYYY-MM-DD"
             placeholder="['开始时间', '结束时间']"
             style="width: 300px"
           />
-        </a-form-item>
+        </a-form-item>-->
+       
 
         <a-form-item>
           <a-button type="primary" @click="handleSearch">筛选</a-button>

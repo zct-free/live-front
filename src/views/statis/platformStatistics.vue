@@ -105,17 +105,17 @@
         </div>
         <a-table
           :dataSource="[
-            { date: '2025-07-14', viewDuration: '6分钟', viewCount: '2次', viewerCount: '2人', avgViewDuration: '3分钟', avgViewCount: '1次' },
-            { date: '2025-07-15', viewDuration: '8分钟', viewCount: '3次', viewerCount: '3人', avgViewDuration: '4分钟', avgViewCount: '1次' },
-            { date: '2025-07-16', viewDuration: '10分钟', viewCount: '5次', viewerCount: '4人', avgViewDuration: '5分钟', avgViewCount: '2次' },
-            { date: '2025-07-17', viewDuration: '7分钟', viewCount: '3次', viewerCount: '3人', avgViewDuration: '3分钟', avgViewCount: '1次' },
-            { date: '2025-07-18', viewDuration: '12分钟', viewCount: '6次', viewerCount: '5人', avgViewDuration: '6分钟', avgViewCount: '2次' },
-            { date: '2025-07-19', viewDuration: '5分钟', viewCount: '2次', viewerCount: '2人', avgViewDuration: '3分钟', avgViewCount: '1次' },
-            { date: '2025-07-20', viewDuration: '9分钟', viewCount: '4次', viewerCount: '4人', avgViewDuration: '4分钟', avgViewCount: '1次' },
-            { date: '2025-07-21', viewDuration: '11分钟', viewCount: '5次', viewerCount: '5人', avgViewDuration: '5分钟', avgViewCount: '2次' },
-            { date: '2025-07-22', viewDuration: '6分钟', viewCount: '3次', viewerCount: '3人', avgViewDuration: '3分钟', avgViewCount: '1次' },
-            { date: '2025-07-23', viewDuration: '8分钟', viewCount: '4次', viewerCount: '4人', avgViewDuration: '4分钟', avgViewCount: '1次' },
-            { date: '2025-07-24', viewDuration: '10分钟', viewCount: '5次', viewerCount: '5人', avgViewDuration: '5分钟', avgViewCount: '2次' }
+            { date: '2025-10-14', viewDuration: '6000分钟', viewCount: '2000次', viewerCount: '200人', avgViewDuration: '30分钟', avgViewCount: '10次' },
+            { date: '2025-10-15', viewDuration: '24000分钟', viewCount: '3000次', viewerCount: '300人', avgViewDuration: '40分钟', avgViewCount: '10次' },
+            { date: '2025-10-16', viewDuration: '20000分钟', viewCount: '8000次', viewerCount: '400人', avgViewDuration: '50分钟', avgViewCount: '20次' },
+            { date: '2025-10-17', viewDuration: '9000分钟', viewCount: '3000次', viewerCount: '300人', avgViewDuration: '30分钟', avgViewCount: '10次' },
+            { date: '2025-10-18', viewDuration: '30000分钟', viewCount: '1000次', viewerCount: '500人', avgViewDuration: '60分钟', avgViewCount: '20次' },
+            { date: '2025-10-19', viewDuration: '6000分钟', viewCount: '2000', viewerCount: '200人', avgViewDuration: '30分钟', avgViewCount: '10次' },
+            { date: '2025-10-20', viewDuration: '16000分钟', viewCount: '4000次', viewerCount: '400人', avgViewDuration: '40分钟', avgViewCount: '10次' },
+            { date: '2025-10-21', viewDuration: '25000分钟', viewCount: '1000次', viewerCount: '500人', avgViewDuration: '50分钟', avgViewCount: '20次' },
+            { date: '2025-10-22', viewDuration: '9000分钟', viewCount: '3000次', viewerCount: '300人', avgViewDuration: '30分钟', avgViewCount: '10次' },
+            { date: '2025-10-23', viewDuration: '16000分钟', viewCount: '4000次', viewerCount: '400人', avgViewDuration: '40分钟', avgViewCount: '10次' },
+            { date: '2025-10-24', viewDuration: '25000分钟', viewCount: '1000次', viewerCount: '500人', avgViewDuration: '50分钟', avgViewCount: '20次' }
           ]"
           :pagination="false"
           rowKey="date"
@@ -129,70 +129,7 @@
           <a-table-column title="人均观看次数" dataIndex="avgViewCount" key="avgViewCount" />
         </a-table>
       </a-tab-pane>
-      <a-tab-pane key="2" tab="观看终端">
-        <a-radio-group v-model:value="rqhz" button-style="solid">
-          <a-radio-button value="a">全部</a-radio-button>
-          <a-radio-button value="b">PC端</a-radio-button>
-          <a-radio-button value="c">移动端</a-radio-button>
-        </a-radio-group>
-        <div class="search-options">
-          <div>
-            <label>选择日期</label>
-            <a-range-picker
-              v-model:value="dateRange"
-              :placeholder="['开始时间', '结束时间']"
-              format="YYYY-MM-DD"
-              style="width: 280px"
-            />
-            <a-button type="primary" @click="handleSearch">搜索</a-button>
-          </div>
-          <a-button>导出列表</a-button>
-        </div>
-        <div style="display: flex; gap: 40px; align-items: flex-start">
-          <div style="flex: 1; display: flex; flex-direction: column; align-items: center">
-            <div style="margin-bottom: 16px; display: flex; gap: 24px">
-              <span style="display: flex; align-items: center">
-                <span style="display: inline-block; width: 10px; height: 10px; background: #6495fa; border-radius: 50%; margin-right: 6px"></span>
-                android-sdk
-              </span>
-              <span style="display: flex; align-items: center">
-                <span style="display: inline-block; width: 10px; height: 10px; background: #5adbb0; border-radius: 50%; margin-right: 6px"></span>
-                Chrome
-              </span>
-            </div>
-            <svg width="320" height="320" viewBox="0 0 320 320" role="img" aria-label="上半蓝色下半绿色的圆">
-              <defs>
-                <clipPath id="topHalf"><rect x="0" y="0" width="320" height="160" /></clipPath>
-                <clipPath id="bottomHalf"><rect x="0" y="160" width="320" height="160" /></clipPath>
-              </defs>
-              <circle cx="160" cy="160" r="140" fill="#6495fa" clip-path="url(#topHalf)" />
-              <circle cx="160" cy="160" r="140" fill="#5adbb0" clip-path="url(#bottomHalf)" />
-              <circle cx="160" cy="160" r="140" fill="none" stroke="#e6eefc" stroke-width="2" />
-            </svg>
-            <div style="display: flex; justify-content: space-between; width: 320px; margin-top: 8px; font-size: 14px; color: #888">
-              <span>Chrome<br />50.00%</span>
-              <span>android-sdk<br />50.00%</span>
-            </div>
-          </div>
-          <div style="flex: 1.2">
-            <a-table
-              :dataSource="[
-                { terminal: 'android-sdk', viewCount: 1, percent: '50%' },
-                { terminal: 'Chrome', viewCount: 1, percent: '50%' }
-              ]"
-              :pagination="false"
-              rowKey="terminal"
-              bordered
-              size="small"
-              style="background: #f9fafd"
-            >
-              <a-table-column title="观看终端" dataIndex="terminal" key="terminal" />
-              <a-table-column title="观看次数" dataIndex="viewCount" key="viewCount" />
-              <a-table-column title="占比" dataIndex="percent" key="percent" />
-            </a-table>
-          </div>
-        </div>
-      </a-tab-pane>
+
       <a-tab-pane key="3" tab="地域分布">
         <a-radio-group v-model:value="rqhz" button-style="solid">
           <a-radio-button value="a">中国地区</a-radio-button>
@@ -218,9 +155,9 @@
           <div style="flex: 1.2">
             <a-table
               :dataSource="[
-                { terminal: '湖北', viewCount: 1, percent: '50%' },
-                { terminal: '广东', viewCount: 0.5, percent: '25%' },
-                { terminal: '浙江', viewCount: 0.5, percent: '25%' }
+                { terminal: '湖北', viewCount: 100, percent: '50%' },
+                { terminal: '广东', viewCount: 50, percent: '25%' },
+                { terminal: '浙江', viewCount: 50, percent: '25%' }
               ]"
               :pagination="false"
               rowKey="terminal"
@@ -272,9 +209,9 @@
           <div style="flex: 1.2">
             <a-table
               :dataSource="[
-                { channel: '6140608', viewerCount: 2 },
-                { channel: '6140609', viewerCount: 5 },
-                { channel: '6140610', viewerCount: 8 }
+                { channel: '3390220', viewerCount: 2 },
+                { channel: '3387148', viewerCount: 5 },
+                { channel: '3386428', viewerCount: 8 }
               ]"
               :pagination="false"
               rowKey="channel"
@@ -290,12 +227,12 @@
       </a-tab-pane>
     </a-tabs>
 
-    <!-- 互动统计模块（重点修改登记/预约观看记录） -->
+    <!-- 互动统计模块 -->
     <div class="page-header">
       <h2>互动统计</h2>
     </div>
     <a-tabs>
-      <!-- 1. 报名观看记录（已修改，与问题2对齐） -->
+      <!-- 1. 报名观看记录 -->
       <a-tab-pane tab="报名观看记录" key="1">
         <div class="data-table">
           <a-table
@@ -304,6 +241,7 @@
             :pagination="registrationPagination"
             :loading="registrationLoading"
             rowKey="id"
+            @change="handleTableChange"
           >
             <template #bodyCell="{ column, record }">
               <template v-if="column.key === 'action'">
@@ -371,19 +309,23 @@ const selectedCategory = ref<string>("");
 const rqhz = ref("a");
 const rqhz2 = ref("a");
 const statisticsData = reactive({
-  viewCount: 2,
-  viewDuration: 6,
-  viewerCount: 2,
-  avgViewDuration: 3,
-  avgViewCount: 1,
+  viewCount: 32000,
+  viewDuration: 186000,
+  viewerCount: 3900,
+  avgViewDuration: 47,
+  avgViewCount: 8,
 });
+const handleTableChange = (pag: any) => {
+  registrationPagination.current = pag.current;
+  registrationPagination.pageSize = pag.pageSize;
+};
 const handleSearch = () => {
   console.log("搜索条件:", { dateRange: dateRange.value, category: selectedCategory.value });
   fetchStatistics();
 };
 const fetchStatistics = async () => {
   try {
-    Object.assign(statisticsData, { viewCount: 2, viewDuration: 6, viewerCount: 2, avgViewDuration: 3, avgViewCount: 1 });
+    Object.assign(statisticsData, { viewCount: 32000, viewDuration: 186000, viewerCount: 3900, avgViewDuration: 47, avgViewCount: 8 });
   } catch (error) {
     console.error("获取统计数据失败:", error);
   }
@@ -395,26 +337,26 @@ onMounted(() => {
 // ---------------------- 1. 报名观看记录（修改后） ----------------------
 // 表格数据：补充id、createTime，channel→channelId
 const registrationTableData = ref([
-  { id: 1, createTime: "2025-07-03 10:00", channelId: "CH001", channelName: "科技频道", viewerCount: 120, registrationCount: 30 },
-  { id: 2, createTime: "2025-07-03 10:30", channelId: "CH002", channelName: "教育频道", viewerCount: 89, registrationCount: 10 },
-  { id: 3, createTime: "2025-07-03 11:00", channelId: "CH003", channelName: "财经频道", viewerCount: 205, registrationCount: 30 },
-  { id: 4, createTime: "2025-07-03 11:30", channelId: "CH004", channelName: "体育频道", viewerCount: 310, registrationCount: 50 },
-  { id: 5, createTime: "2025-07-03 14:00", channelId: "CH005", channelName: "娱乐频道", viewerCount: 420, registrationCount: 50 },
-  { id: 6, createTime: "2025-07-03 14:30", channelId: "CH006", channelName: "健康频道", viewerCount: 78, registrationCount: 15 },
-  { id: 7, createTime: "2025-07-03 15:00", channelId: "CH007", channelName: "美食频道", viewerCount: 156, registrationCount: 18 },
-  { id: 8, createTime: "2025-07-03 15:30", channelId: "CH008", channelName: "旅游频道", viewerCount: 92, registrationCount: 15 },
-  { id: 9, createTime: "2025-07-03 16:00", channelId: "CH009", channelName: "汽车频道", viewerCount: 189, registrationCount: 21 },
-  { id: 10, createTime: "2025-07-03 16:30", channelId: "CH010", channelName: "时尚频道", viewerCount: 135, registrationCount: 16 },
-  { id: 11, createTime: "2025-07-03 17:00", channelId: "CH011", channelName: "艺术频道", viewerCount: 68, registrationCount: 12 },
-  { id: 12, createTime: "2025-07-03 17:30", channelId: "CH012", channelName: "历史频道", viewerCount: 105, registrationCount: 19 }
+  { id: 1, createTime: "2025-10-30 10:00", channelId: "3390220", channelName: "音乐", viewerCount: 120, registrationCount: 300 },
+  { id: 2, createTime: "2025-10-30 10:30", channelId: "3387148", channelName: "原创", viewerCount: 89, registrationCount: 100 },
+  { id: 3, createTime: "2025-10-30 11:00", channelId: "3386428", channelName: "游戏", viewerCount: 205, registrationCount: 300 },
+  { id: 4, createTime: "2025-10-30 11:30", channelId: "3385843", channelName: "教育", viewerCount: 310, registrationCount: 500 },
+  { id: 5, createTime: "2025-10-30 14:00", channelId: "3385674", channelName: "社会课堂", viewerCount: 420, registrationCount: 500 },
+  { id: 6, createTime: "2025-10-30 14:30", channelId: "3379988", channelName: "中秋直播", viewerCount: 78, registrationCount: 150 },
+  { id: 7, createTime: "2025-10-30 15:00", channelId: "3365921", channelName: "游戏", viewerCount: 156, registrationCount: 180 },
+  { id: 8, createTime: "2025-10-30 15:30", channelId: "3365259", channelName: "原创舞蹈", viewerCount: 92, registrationCount: 150 },
+  { id: 9, createTime: "2025-10-30 16:00", channelId: "3364223", channelName: "原创时尚", viewerCount: 189, registrationCount: 210 },
+  { id: 10, createTime: "2025-10-30 16:30", channelId: "3353683", channelName: "原创", viewerCount: 135, registrationCount: 160 },
+  { id: 11, createTime: "2025-10-30 17:00", channelId: "3349723", channelName: "教育", viewerCount: 68, registrationCount: 120 },
+  { id: 12, createTime: "2025-10-30 17:30", channelId: "3348835", channelName: "电影", viewerCount: 105, registrationCount: 190 }
 ]);
 // 表格列：新增创建时间，操作列用bodyCell
 const registrationColumns = [
   { title: "创建时间", dataIndex: "createTime", key: "createTime", width: 140 },
   { title: "频道号", dataIndex: "channelId", key: "channelId", width: 100 },
   { title: "频道名称", dataIndex: "channelName", key: "channelName", width: 150 },
-  { title: "观看人数", dataIndex: "viewerCount", key: "viewerCount", width: 100 },
   { title: "报名人数", dataIndex: "registrationCount", key: "registrationCount", width: 100 },
+  { title: "观看人数", dataIndex: "viewerCount", key: "viewerCount", width: 100 },
   { title: "操作", key: "action", width: 80, fixed: "right" }
 ];
 // 分页配置
@@ -436,18 +378,18 @@ const handleRegistrationView = (record: any) => {
 // ---------------------- 2. 登记观看记录（修改后） ----------------------
 // 表格数据：补充id、createTime，channel→channelId，latestRecordTime保留
 const recordTableData = ref([
-  { id: 1, createTime: "2025-07-03 09:00", latestRecordTime: "2025-10-28 09:15", channelId: "CH001", channelName: "科技频道", registrationCount: 120 },
-  { id: 2, createTime: "2025-07-03 09:30", latestRecordTime: "2025-10-28 10:30", channelId: "CH002", channelName: "教育频道", registrationCount: 89 },
-  { id: 3, createTime: "2025-07-03 10:00", latestRecordTime: "2025-10-28 11:45", channelId: "CH003", channelName: "财经频道", registrationCount: 205 },
-  { id: 4, createTime: "2025-07-03 10:30", latestRecordTime: "2025-10-28 13:00", channelId: "CH004", channelName: "体育频道", registrationCount: 310 },
-  { id: 5, createTime: "2025-07-03 11:00", latestRecordTime: "2025-10-28 14:20", channelId: "CH005", channelName: "娱乐频道", registrationCount: 420 },
-  { id: 6, createTime: "2025-07-03 11:30", latestRecordTime: "2025-10-28 15:10", channelId: "CH006", channelName: "健康频道", registrationCount: 78 },
-  { id: 7, createTime: "2025-07-03 14:00", latestRecordTime: "2025-10-28 16:30", channelId: "CH007", channelName: "美食频道", registrationCount: 156 },
-  { id: 8, createTime: "2025-07-03 14:30", latestRecordTime: "2025-10-28 17:45", channelId: "CH008", channelName: "旅游频道", registrationCount: 92 },
-  { id: 9, createTime: "2025-07-03 15:00", latestRecordTime: "2025-10-28 18:20", channelId: "CH009", channelName: "汽车频道", registrationCount: 189 },
-  { id: 10, createTime: "2025-07-03 15:30", latestRecordTime: "2025-10-28 19:50", channelId: "CH010", channelName: "时尚频道", registrationCount: 135 },
-  { id: 11, createTime: "2025-07-03 16:00", latestRecordTime: "2025-10-28 20:10", channelId: "CH011", channelName: "艺术频道", registrationCount: 68 },
-  { id: 12, createTime: "2025-07-03 16:30", latestRecordTime: "2025-10-28 20:30", channelId: "CH012", channelName: "历史频道", registrationCount: 105 }
+ { id: 1, createTime: "2025-10-03 09:00", latestRecordTime: "2025-10-28 09:15", channelId: "3390220", channelName: "音乐", registrationCount: 120 },
+  { id: 2, createTime: "2025-10-03 09:30", latestRecordTime: "2025-10-28 10:30", channelId: "3387148", channelName: "原创", registrationCount: 89 },
+  { id: 3, createTime: "2025-10-03 10:00", latestRecordTime: "2025-10-28 11:45", channelId: "3386428", channelName: "游戏", registrationCount: 205 },
+  { id: 4, createTime: "2025-10-03 10:30", latestRecordTime: "2025-10-28 13:00", channelId: "3385843", channelName: "教育", registrationCount: 310 },
+  { id: 5, createTime: "2025-10-03 11:00", latestRecordTime: "2025-10-28 14:20", channelId: "3385674", channelName: "社会课堂", registrationCount: 420 },
+  { id: 6, createTime: "2025-10-03 11:30", latestRecordTime: "2025-10-28 15:10", channelId: "3379988", channelName: "中秋直播", registrationCount: 78 },
+  { id: 7, createTime: "2025-10-03 14:00", latestRecordTime: "2025-10-28 16:30", channelId: "3365921", channelName: "游戏", registrationCount: 156 },
+  { id: 8, createTime: "2025-10-03 14:30", latestRecordTime: "2025-10-28 17:45", channelId: "3365259", channelName: "原创舞蹈", registrationCount: 92 },
+  { id: 9, createTime: "2025-10-03 15:00", latestRecordTime: "2025-10-28 18:20", channelId: "3364223", channelName: "原创时尚", registrationCount: 189 },
+  { id: 10, createTime: "2025-10-03 15:30", latestRecordTime: "2025-10-28 19:50", channelId: "3353683", channelName: "原创", registrationCount: 135 },
+  { id: 11, createTime: "2025-10-03 16:00", latestRecordTime: "2025-10-28 20:10", channelId: "3349723", channelName: "教育", registrationCount: 68 },
+  { id: 12, createTime: "2025-10-03 16:30", latestRecordTime: "2025-10-28 20:30", channelId: "3348835", channelName: "电影", registrationCount: 105 }
 ]);
 // 表格列：保留最新记录时间，新增创建时间，操作列用bodyCell
 const recordColumns = [
@@ -477,18 +419,18 @@ const handleRecordView = (record: any) => {
 // ---------------------- 3. 预约观看记录（修改后） ----------------------
 // 表格数据：补充id、createTime，channel→channelId
 const reservationTableData = ref([
-  { id: 1, createTime: "2025-07-03 08:00", channelId: "CH001", channelName: "科技频道", reservationCount: 180 },
-  { id: 2, createTime: "2025-07-03 08:30", channelId: "CH002", channelName: "教育频道", reservationCount: 150 },
-  { id: 3, createTime: "2025-07-03 09:00", channelId: "CH003", channelName: "财经频道", reservationCount: 220 },
-  { id: 4, createTime: "2025-07-03 09:30", channelId: "CH004", channelName: "体育频道", reservationCount: 380 },
-  { id: 5, createTime: "2025-07-03 10:00", channelId: "CH005", channelName: "娱乐频道", reservationCount: 450 },
-  { id: 6, createTime: "2025-07-03 10:30", channelId: "CH006", channelName: "健康频道", reservationCount: 120 },
-  { id: 7, createTime: "2025-07-03 11:00", channelId: "CH007", channelName: "美食频道", reservationCount: 210 },
-  { id: 8, createTime: "2025-07-03 11:30", channelId: "CH008", channelName: "旅游频道", reservationCount: 160 },
-  { id: 9, createTime: "2025-07-03 14:00", channelId: "CH009", channelName: "汽车频道", reservationCount: 250 },
-  { id: 10, createTime: "2025-07-03 14:30", channelId: "CH010", channelName: "时尚频道", reservationCount: 190 },
-  { id: 11, createTime: "2025-07-03 15:00", channelId: "CH011", channelName: "艺术频道", reservationCount: 95 },
-  { id: 12, createTime: "2025-07-03 15:30", channelId: "CH012", channelName: "历史频道", reservationCount: 140 }
+ { id: 1, createTime: "2025-10-03 08:00", channelId: "3390220", channelName: "音乐", reservationCount: 180 },
+  { id: 2, createTime: "2025-10-03 08:30", channelId: "3387148", channelName: "原创", reservationCount: 150 },
+  { id: 3, createTime: "2025-10-03 09:00", channelId: "3386428", channelName: "游戏", reservationCount: 220 },
+  { id: 4, createTime: "2025-10-03 09:30", channelId: "3385843", channelName: "教育", reservationCount: 380 },
+  { id: 5, createTime: "2025-10-03 10:00", channelId: "3385674", channelName: "社会课堂", reservationCount: 450 },
+  { id: 6, createTime: "2025-10-03 10:30", channelId: "3379988", channelName: "中秋直播", reservationCount: 120 },
+  { id: 7, createTime: "2025-10-03 11:00", channelId: "3365921", channelName: "游戏", reservationCount: 210 },
+  { id: 8, createTime: "2025-10-03 11:30", channelId: "3365259", channelName: "原创舞蹈", reservationCount: 160 },
+  { id: 9, createTime: "2025-10-03 14:00", channelId: "3364223", channelName: "原创时尚", reservationCount: 250 },
+  { id: 10, createTime: "2025-10-03 14:30", channelId: "3353683", channelName: "原创", reservationCount: 190 },
+  { id: 11, createTime: "2025-10-03 15:00", channelId: "3349723", channelName: "教育", reservationCount: 95 },
+  { id: 12, createTime: "2025-10-03 15:30", channelId: "3348835", channelName: "电影", reservationCount: 140 }
 ]);
 // 表格列：新增创建时间，操作列用bodyCell
 const reservationColumns = [

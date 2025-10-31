@@ -66,182 +66,165 @@ const searchForm = reactive({
 // 表格相关数据
 const loading = ref(false);
 const tableData = ref([
-  {
+ {
     id: 1,
-    channelNumber: "001",
-    channelId: "6140608",
-    channelName: "Spring 知识精讲",
-    category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 50,
-    viewCount: 2,
-    viewDuration: "6分钟",
-    viewerCount: "2人",
-    maxOnlineCount: "2人",
-  }, {
+    channelId: "3390220",
+    channelName: "音乐",
+    category: "音乐",
+    beginTime: "2025-10-23 17:26:19",
+    visitCount: 100,    // 匹配目标数据
+    viewCount: 50,     // 匹配目标数据
+    viewDuration: "100分钟", // 匹配目标数据
+    viewerCount: "100人",   // 匹配目标数据
+    maxOnlineCount: "45人"  // 调整：低于viewerCount，符合在线峰值逻辑
+  },
+  {
     id: 2,
-    channelNumber: "002",
-    channelId: "6140609",
-    channelName: "MySQL 性能优化实战",
+    channelId: "3387148",
+    channelName: "原创",
     category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 280,
-    viewCount: 16,
-    viewDuration: "23分钟",
-    viewerCount: "14人",
-    maxOnlineCount: "9人",
+    beginTime: "2025-10-24 17:26:19",
+    visitCount: 500,    // 匹配目标数据
+    viewCount: 120,     // 匹配目标数据
+    viewDuration: "200分钟", // 匹配目标数据
+    viewerCount: "150人",   // 匹配目标数据
+    maxOnlineCount: "22人"  // 保留目标原maxOnlineCount（已符合逻辑）
   },
   {
     id: 3,
-    channelNumber: "003",
-    channelId: "6140610",
-    channelName: "React 组件设计模式",
-    category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 402,
-    viewCount: 31,
-    viewDuration: "45分钟",
-    viewerCount: "28人",
-    maxOnlineCount: "18人",
+    channelId: "3386428",
+    channelName: "游戏",
+    category: "娱乐",
+    beginTime: "2025-10-25 17:26:19",
+    visitCount: 50,     // 匹配目标数据
+    viewCount: 20,      // 匹配目标数据
+    viewDuration: "60分钟",  // 匹配目标数据
+    viewerCount: "200人",   // 匹配目标数据
+    maxOnlineCount: "12人"  // 保留目标原maxOnlineCount（已符合逻辑）
   },
   {
     id: 4,
-    channelNumber: "004",
-    channelId: "6140611",
-    channelName: "Docker 容器化部署",
+    channelId: "3385843",
+    channelName: "教育",
     category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 190,
-    viewCount: 12,
-    viewDuration: "18分钟",
-    viewerCount: "10人",
-    maxOnlineCount: "7人",
+    beginTime: "2025-10-26 17:26:19",
+    visitCount: 50,     // 匹配目标数据
+    viewCount: 120,     // 匹配目标数据
+    viewDuration: "60分钟",  // 匹配目标数据
+    viewerCount: "200人",   // 匹配目标数据
+    maxOnlineCount: "20人"  // 保留目标原maxOnlineCount（已符合逻辑）
   },
   {
     id: 5,
-    channelNumber: "005",
-    channelId: "6140612",
-    channelName: "Java 并发编程深度解析",
+    channelId: "3385674",
+    channelName: "社会课堂",
     category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 350,
-    viewCount: 24,
-    viewDuration: "32分钟",
-    viewerCount: "21人",
-    maxOnlineCount: "15人",
+    beginTime: "2025-10-27 17:26:19",
+    visitCount: 20,     // 匹配目标数据
+    viewCount: 30,      // 匹配目标数据
+    viewDuration: "100分钟", // 匹配目标数据
+    viewerCount: "50人",    // 匹配目标数据
+    maxOnlineCount: "17人"  // 保留目标原maxOnlineCount（已符合逻辑）
   },
   {
     id: 6,
-    channelNumber: "006",
-    channelId: "6140613",
-    channelName: "Vue3 组合式API实践",
-    category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 270,
-    viewCount: 19,
-    viewDuration: "25分钟",
-    viewerCount: "16人",
-    maxOnlineCount: "11人",
+    channelId: "3379988",
+    channelName: "中秋直播",
+    category: "娱乐",
+    beginTime: "2025-10-28 17:26:19",
+    visitCount: 150,    // 匹配目标数据
+    viewCount: 120,     // 匹配目标数据
+    viewDuration: "90分钟",  // 匹配目标数据
+    viewerCount: "200人",   // 匹配目标数据
+    maxOnlineCount: "22人"  // 保留目标原maxOnlineCount（已符合逻辑）
   },
   {
     id: 7,
-    channelNumber: "007",
-    channelId: "6140614",
-    channelName: "Redis 缓存策略设计",
-    category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 220,
-    viewCount: 15,
-    viewDuration: "20分钟",
-    viewerCount: "13人",
-    maxOnlineCount: "8人",
+    channelId: "3365921",
+    channelName: "游戏",
+    category: "娱乐",
+    beginTime: "2025-10-29 17:26:19",
+    visitCount: 50,     // 匹配目标数据
+    viewCount: 120,     // 匹配目标数据
+    viewDuration: "80分钟",  // 匹配目标数据
+    viewerCount: "200人",   // 匹配目标数据
+    maxOnlineCount: "20人"  // 保留目标原maxOnlineCount（已符合逻辑）
   },
   {
     id: 8,
-    channelNumber: "008",
-    channelId: "6140615",
-    channelName: "Kubernetes 集群管理",
-    category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 160,
-    viewCount: 9,
-    viewDuration: "14分钟",
-    viewerCount: "8人",
-    maxOnlineCount: "5人",
+    channelId: "3365259",
+    channelName: "原创舞蹈",
+    category: "体育",
+    beginTime: "2025-10-30 17:26:19",
+    visitCount: 50,     // 匹配目标数据
+    viewCount: 120,     // 匹配目标数据
+    viewDuration: "60分钟",  // 匹配目标数据
+    viewerCount: "120人",   // 匹配目标数据
+    maxOnlineCount: "20人"  // 保留目标原maxOnlineCount（已符合逻辑）
   },
   {
     id: 9,
-    channelNumber: "009",
-    channelId: "6140616",
-    channelName: "Python 数据分析入门",
-    category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 380,
-    viewCount: 29,
-    viewDuration: "38分钟",
-    viewerCount: "25人",
-    maxOnlineCount: "17人",
+    channelId: "3364223",
+    channelName: "原创时尚",
+    category: "娱乐",
+    beginTime: "2025-10-31 17:26:19",
+    visitCount: 150,    // 匹配目标数据
+    viewCount: 120,     // 匹配目标数据
+    viewDuration: "150分钟", // 匹配目标数据
+    viewerCount: "20人",    // 匹配目标数据
+    maxOnlineCount: "12人"  // 保留目标原maxOnlineCount（已符合逻辑）
   },
   {
     id: 10,
-    channelNumber: "010",
-    channelId: "6140617",
-    channelName: "微服务架构设计与实践",
-    category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 450,
-    viewCount: 33,
-    viewDuration: "42分钟",
-    viewerCount: "30人",
-    maxOnlineCount: "22人",
+    channelId: "3353683",
+    channelName: "原创",
+    category: "娱乐",
+    beginTime: "2025-10-20 17:26:19",
+    visitCount: 150,    // 匹配目标数据
+    viewCount: 120,     // 匹配目标数据
+    viewDuration: "60分钟",  // 匹配目标数据
+    viewerCount: "50人",    // 匹配目标数据
+    maxOnlineCount: "20人"  // 保留目标原maxOnlineCount（已符合逻辑）
   },
   {
     id: 11,
-    channelNumber: "011",
-    channelId: "6140618",
-    channelName: "TypeScript 类型系统详解",
+    channelId: "3349723",
+    channelName: "教育",
     category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 240,
-    viewCount: 17,
-    viewDuration: "22分钟",
-    viewerCount: "14人",
-    maxOnlineCount: "9人",
+    beginTime: "2025-10-21 17:26:19",
+    visitCount: 50,     // 匹配目标数据
+    viewCount: 20,      // 匹配目标数据
+    viewDuration: "120分钟", // 匹配目标数据
+    viewerCount: "20人",    // 匹配目标数据
+    maxOnlineCount: "12人"  // 保留目标原maxOnlineCount（已符合逻辑）
   },
   {
     id: 12,
-    channelNumber: "012",
-    channelId: "6140619",
-    channelName: "Elasticsearch 搜索引擎搭建",
-    category: "教育",
-    beginTime: "2025-09-26 17:26:19",
-    visitCount: 210,
-    viewCount: 13,
-    viewDuration: "16分钟",
-    viewerCount: "11人",
-    maxOnlineCount: "6人",
-  },
+    channelId: "3348835",
+    channelName: "电影",
+    category: "娱乐",
+    beginTime: "2025-10-22 17:26:19",
+    visitCount: 50,     // 匹配目标数据
+    viewCount: 20,      // 匹配目标数据
+    viewDuration: "60分钟",  // 匹配目标数据
+    viewerCount: "20人",    // 匹配目标数据
+    maxOnlineCount: "12人"  // 保留目标原maxOnlineCount（已符合逻辑）
+  }
 ]);
 
 // 表格列定义
 const columns = [
   {
     title: "频道号",
-    dataIndex: "channelNumber",
-    key: "channelNumber",
-    width: 140,
-  },
-  {
-    title: "场次号",
     dataIndex: "channelId",
     key: "channelId",
     width: 100,
   },
   {
-    title: "场次名称",
+    title: "频道名称",
     dataIndex: "channelName",
     key: "channelName",
-    width: 150,
+    width: 200,
   },
   {
     title: "直播分类",
@@ -253,7 +236,7 @@ const columns = [
     title: "开始时间",
     dataIndex: "beginTime",
     key: "beginTime",
-    width: 100,
+    width: 150,
   },
   {
     title: "开播时长",
