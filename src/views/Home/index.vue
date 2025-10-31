@@ -120,7 +120,7 @@
 import dayjs, { Dayjs } from "dayjs";
 import * as echarts from "echarts";
 import { nextTick, onMounted, ref } from "vue";
-const dateRange = ref<[Dayjs, Dayjs]>([dayjs("2025-07-08"), dayjs("2025-07-14")]);
+const dateRange = ref<[Dayjs, Dayjs]>([dayjs("2025-10-08"), dayjs("2025-10-14")]);
 const liveCategory = ref("全部");
 // 统计数据
 const statsData = ref([

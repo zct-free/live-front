@@ -237,102 +237,102 @@ const loadData = async () => {
 
     // 模拟数据
     const mockData: any[] = [
-      {
-        id: "1",
-        channelId: "3390220",
-        userId: "U123456",
-        userNickname: "张三",
-        banMethod: "manual",
-        banTime: "2025-10-15 10:30:00",
-      },
-      {
-        id: "2",
-        channelId: "3387148",
-        userId: "U234567",
-        userNickname: "李四",
-        banMethod: "auto",
-        banTime: "2025-10-16 14:20:00",
-      },
-      {
-        id: "3",
-        channelId: "3386428",
-        userId: "U345678",
-        userNickname: "王五",
-        banMethod: "manual",
-        banTime: "2025-10-17 09:15:00",
-      },
-      {
-        id: "4",
-        channelId: "3385843",
-        userId: "U456789",
-        userNickname: "赵六",
-        banMethod: "auto",
-        banTime: "2025-10-18 16:45:00",
-      },
-      {
-        id: "5",
-        channelId: "3385674",
-        userId: "U567890",
-        userNickname: "钱七",
-        banMethod: "manual",
-        banTime: "2025-10-19 11:30:00",
-      },
-      {
-        id: "6",
-        channelId: "3379988",
-        userId: "U678901",
-        userNickname: "孙八",
-        banMethod: "auto",
-        banTime: "2025-10-20 13:25:00",
-      },
-      {
-        id: "7",
-        channelId: "3365921",
-        userId: "U789012",
-        userNickname: "周九",
-        banMethod: "manual",
-        banTime: "2025-10-21 08:50:00",
-      },
-      {
-        id: "8",
-        channelId: "3365259",
-        userId: "U890123",
-        userNickname: "吴十",
-        banMethod: "auto",
-        banTime: "2025-10-22 15:10:00",
-      },
-      {
-        id: "9",
-        channelId: "3364223",
-        userId: "U901234",
-        userNickname: "郑十一",
-        banMethod: "manual",
-        banTime: "2025-10-23 12:40:00",
-      },
-      {
-        id: "10",
-        channelId: "3353683",
-        userId: "U012345",
-        userNickname: "陈十二",
-        banMethod: "auto",
-        banTime: "2025-10-24 17:20:00",
-      },
-      {
-        id: "11",
-        channelId: "3390220",
-        userId: "U012345",
-        userNickname: "陈十三",
-        banMethod: "auto",
-        banTime: "2025-10-24 17:20:00",
-      },
-      {
-        id: "12",
-        channelId: "3348835",
-        userId: "U012345",
-        userNickname: "陈十四",
-        banMethod: "auto",
-        banTime: "2025-10-24 17:20:00",
-      },
+        {
+      id: "1",
+      channelId: "3390220",
+      userId: "U001234",  // 调整为U+6位数字格式
+      userNickname: "违规用户001",  // 按顺序命名
+      banMethod: "manual",
+      banTime: "2025-10-15 10:30:00",
+    },
+    {
+      id: "2",
+      channelId: "3387148",
+      userId: "U002345",  // 调整为U+6位数字格式
+      userNickname: "违规用户002",  // 按顺序命名
+      banMethod: "auto",
+      banTime: "2025-10-16 14:20:00",
+    },
+    {
+      id: "3",
+      channelId: "3386428",
+      userId: "U003456",  // 调整为U+6位数字格式
+      userNickname: "违规用户003",  // 按顺序命名
+      banMethod: "manual",
+      banTime: "2025-10-17 09:15:00",
+    },
+    {
+      id: "4",
+      channelId: "3385843",
+      userId: "U004567",  // 调整为U+6位数字格式
+      userNickname: "违规用户004",  // 按顺序命名
+      banMethod: "auto",
+      banTime: "2025-10-18 16:45:00",
+    },
+    {
+      id: "5",
+      channelId: "3385674",
+      userId: "U005678",  // 调整为U+6位数字格式
+      userNickname: "违规用户005",  // 按顺序命名
+      banMethod: "manual",
+      banTime: "2025-10-19 11:30:00",
+    },
+    {
+      id: "6",
+      channelId: "3379988",
+      userId: "U006789",  // 调整为U+6位数字格式
+      userNickname: "违规用户006",  // 按顺序命名
+      banMethod: "auto",
+      banTime: "2025-10-20 13:25:00",
+    },
+    {
+      id: "7",
+      channelId: "3365921",
+      userId: "U007890",  // 调整为U+6位数字格式
+      userNickname: "违规用户007",  // 按顺序命名
+      banMethod: "manual",
+      banTime: "2025-10-21 08:50:00",
+    },
+    {
+      id: "8",
+      channelId: "3365259",
+      userId: "U008901",  // 调整为U+6位数字格式
+      userNickname: "违规用户008",  // 按顺序命名
+      banMethod: "auto",
+      banTime: "2025-10-22 15:10:00",
+    },
+    {
+      id: "9",
+      channelId: "3364223",
+      userId: "U009012",  // 调整为U+6位数字格式
+      userNickname: "违规用户009",  // 按顺序命名
+      banMethod: "manual",
+      banTime: "2025-10-23 12:40:00",
+    },
+    {
+      id: "10",
+      channelId: "3353683",
+      userId: "U000123",  // 调整为U+6位数字格式
+      userNickname: "违规用户010",  // 按顺序命名
+      banMethod: "auto",
+      banTime: "2025-10-24 17:20:00",
+    },
+    {
+      id: "11",
+      channelId: "3390220",
+      userId: "U001357",  // 调整为U+6位数字格式（确保唯一）
+      userNickname: "违规用户011",  // 按顺序命名
+      banMethod: "auto",
+      banTime: "2025-10-24 17:20:00",
+    },
+    {
+      id: "12",
+      channelId: "3348835",
+      userId: "U002468",  // 调整为U+6位数字格式（确保唯一）
+      userNickname: "违规用户012",  // 按顺序命名
+      banMethod: "auto",
+      banTime: "2025-10-24 17:20:00",
+    }
     ];
 
     tableData.value = mockData;

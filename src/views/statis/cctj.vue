@@ -72,11 +72,11 @@ const tableData = ref([
     channelName: "音乐",
     category: "音乐",
     beginTime: "2025-10-23 17:26:19",
-    visitCount: 100,    // 匹配目标数据
-    viewCount: 50,     // 匹配目标数据
-    viewDuration: "100分钟", // 匹配目标数据
-    viewerCount: "100人",   // 匹配目标数据
-    maxOnlineCount: "45人"  // 调整：低于viewerCount，符合在线峰值逻辑
+    visitCount: "100分钟",
+    viewCount: "50人",
+    viewDuration: "100分钟",
+    viewerCount: "100人",
+    maxOnlineCount: "45人"
   },
   {
     id: 2,
@@ -84,11 +84,11 @@ const tableData = ref([
     channelName: "原创",
     category: "教育",
     beginTime: "2025-10-24 17:26:19",
-    visitCount: 500,    // 匹配目标数据
-    viewCount: 120,     // 匹配目标数据
-    viewDuration: "200分钟", // 匹配目标数据
-    viewerCount: "150人",   // 匹配目标数据
-    maxOnlineCount: "22人"  // 保留目标原maxOnlineCount（已符合逻辑）
+    visitCount: "500分钟",
+    viewCount: "120人",
+    viewDuration: "200分钟",
+    viewerCount: "150人",
+    maxOnlineCount: "22人"
   },
   {
     id: 3,
@@ -96,11 +96,11 @@ const tableData = ref([
     channelName: "游戏",
     category: "娱乐",
     beginTime: "2025-10-25 17:26:19",
-    visitCount: 50,     // 匹配目标数据
-    viewCount: 20,      // 匹配目标数据
-    viewDuration: "60分钟",  // 匹配目标数据
-    viewerCount: "200人",   // 匹配目标数据
-    maxOnlineCount: "12人"  // 保留目标原maxOnlineCount（已符合逻辑）
+    visitCount: "50分钟",
+    viewCount: "20人",
+    viewDuration: "60分钟",
+    viewerCount: "200人",
+    maxOnlineCount: "12人"
   },
   {
     id: 4,
@@ -108,11 +108,11 @@ const tableData = ref([
     channelName: "教育",
     category: "教育",
     beginTime: "2025-10-26 17:26:19",
-    visitCount: 50,     // 匹配目标数据
-    viewCount: 120,     // 匹配目标数据
-    viewDuration: "60分钟",  // 匹配目标数据
-    viewerCount: "200人",   // 匹配目标数据
-    maxOnlineCount: "20人"  // 保留目标原maxOnlineCount（已符合逻辑）
+    visitCount: "50分钟",
+    viewCount: "120人",
+    viewDuration: "60分钟",
+    viewerCount: "200人",
+    maxOnlineCount: "20人"
   },
   {
     id: 5,
@@ -120,11 +120,11 @@ const tableData = ref([
     channelName: "社会课堂",
     category: "教育",
     beginTime: "2025-10-27 17:26:19",
-    visitCount: 20,     // 匹配目标数据
-    viewCount: 30,      // 匹配目标数据
-    viewDuration: "100分钟", // 匹配目标数据
-    viewerCount: "50人",    // 匹配目标数据
-    maxOnlineCount: "17人"  // 保留目标原maxOnlineCount（已符合逻辑）
+    visitCount: "20分钟",
+    viewCount: "30人",
+    viewDuration: "100分钟",
+    viewerCount: "50人",
+    maxOnlineCount: "17人"
   },
   {
     id: 6,
@@ -132,11 +132,11 @@ const tableData = ref([
     channelName: "中秋直播",
     category: "娱乐",
     beginTime: "2025-10-28 17:26:19",
-    visitCount: 150,    // 匹配目标数据
-    viewCount: 120,     // 匹配目标数据
-    viewDuration: "90分钟",  // 匹配目标数据
-    viewerCount: "200人",   // 匹配目标数据
-    maxOnlineCount: "22人"  // 保留目标原maxOnlineCount（已符合逻辑）
+    visitCount: "150分钟",
+    viewCount: "120人",
+    viewDuration: "90分钟",
+    viewerCount: "200人",
+    maxOnlineCount: "22人"
   },
   {
     id: 7,
@@ -144,11 +144,11 @@ const tableData = ref([
     channelName: "游戏",
     category: "娱乐",
     beginTime: "2025-10-29 17:26:19",
-    visitCount: 50,     // 匹配目标数据
-    viewCount: 120,     // 匹配目标数据
-    viewDuration: "80分钟",  // 匹配目标数据
-    viewerCount: "200人",   // 匹配目标数据
-    maxOnlineCount: "20人"  // 保留目标原maxOnlineCount（已符合逻辑）
+    visitCount: "50分钟",
+    viewCount: "120人",
+    viewDuration: "80分钟",
+    viewerCount: "200人",
+    maxOnlineCount: "20人"
   },
   {
     id: 8,
@@ -156,11 +156,11 @@ const tableData = ref([
     channelName: "原创舞蹈",
     category: "体育",
     beginTime: "2025-10-30 17:26:19",
-    visitCount: 50,     // 匹配目标数据
-    viewCount: 120,     // 匹配目标数据
-    viewDuration: "60分钟",  // 匹配目标数据
-    viewerCount: "120人",   // 匹配目标数据
-    maxOnlineCount: "20人"  // 保留目标原maxOnlineCount（已符合逻辑）
+    visitCount: "50分钟",
+    viewCount: "120人",
+    viewDuration: "60分钟",
+    viewerCount: "120人",
+    maxOnlineCount: "20人"
   },
   {
     id: 9,
@@ -168,11 +168,11 @@ const tableData = ref([
     channelName: "原创时尚",
     category: "娱乐",
     beginTime: "2025-10-31 17:26:19",
-    visitCount: 150,    // 匹配目标数据
-    viewCount: 120,     // 匹配目标数据
-    viewDuration: "150分钟", // 匹配目标数据
-    viewerCount: "20人",    // 匹配目标数据
-    maxOnlineCount: "12人"  // 保留目标原maxOnlineCount（已符合逻辑）
+    visitCount: "150分钟",
+    viewCount: "120人",
+    viewDuration: "150分钟",
+    viewerCount: "20人",
+    maxOnlineCount: "12人"
   },
   {
     id: 10,
@@ -180,11 +180,11 @@ const tableData = ref([
     channelName: "原创",
     category: "娱乐",
     beginTime: "2025-10-20 17:26:19",
-    visitCount: 150,    // 匹配目标数据
-    viewCount: 120,     // 匹配目标数据
-    viewDuration: "60分钟",  // 匹配目标数据
-    viewerCount: "50人",    // 匹配目标数据
-    maxOnlineCount: "20人"  // 保留目标原maxOnlineCount（已符合逻辑）
+    visitCount: "150分钟",
+    viewCount: "120人",
+    viewDuration: "60分钟",
+    viewerCount: "50人",
+    maxOnlineCount: "20人"
   },
   {
     id: 11,
@@ -192,11 +192,11 @@ const tableData = ref([
     channelName: "教育",
     category: "教育",
     beginTime: "2025-10-21 17:26:19",
-    visitCount: 50,     // 匹配目标数据
-    viewCount: 20,      // 匹配目标数据
-    viewDuration: "120分钟", // 匹配目标数据
-    viewerCount: "20人",    // 匹配目标数据
-    maxOnlineCount: "12人"  // 保留目标原maxOnlineCount（已符合逻辑）
+    visitCount: "50分钟",
+    viewCount: "20人",
+    viewDuration: "120分钟",
+    viewerCount: "20人",
+    maxOnlineCount: "12人"
   },
   {
     id: 12,
@@ -204,11 +204,11 @@ const tableData = ref([
     channelName: "电影",
     category: "娱乐",
     beginTime: "2025-10-22 17:26:19",
-    visitCount: 50,     // 匹配目标数据
-    viewCount: 20,      // 匹配目标数据
-    viewDuration: "60分钟",  // 匹配目标数据
-    viewerCount: "20人",    // 匹配目标数据
-    maxOnlineCount: "12人"  // 保留目标原maxOnlineCount（已符合逻辑）
+    visitCount: "50分钟",
+    viewCount: "20人",
+    viewDuration: "60分钟",
+    viewerCount: "20人",
+    maxOnlineCount: "12人"
   }
 ]);
 
@@ -224,7 +224,7 @@ const columns = [
     title: "频道名称",
     dataIndex: "channelName",
     key: "channelName",
-    width: 200,
+    width: 150,
   },
   {
     title: "直播分类",
@@ -242,7 +242,7 @@ const columns = [
     title: "开播时长",
     dataIndex: "visitCount",
     key: "visitCount",
-    width: 100,
+    width: 150,
   },
   {
     title: "直播观看人数",
@@ -251,7 +251,7 @@ const columns = [
     width: 100,
   },
   {
-    title: "直播观看总时长（分）",
+    title: "直播观看总时长",
     dataIndex: "viewDuration",
     key: "viewDuration",
     width: 100,
@@ -263,10 +263,10 @@ const columns = [
     width: 100,
   },
   {
-    title: "回看时长（分）",
+    title: "回看时长",
     dataIndex: "maxOnlineCount",
     key: "maxOnlineCount",
-    width: 140,
+    width: 100,
   },
   {
     title: "回看人数",

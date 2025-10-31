@@ -337,18 +337,18 @@ onMounted(() => {
 // ---------------------- 1. 报名观看记录（修改后） ----------------------
 // 表格数据：补充id、createTime，channel→channelId
 const registrationTableData = ref([
-  { id: 1, createTime: "2025-10-30 10:00", channelId: "3390220", channelName: "音乐", viewerCount: 120, registrationCount: 300 },
-  { id: 2, createTime: "2025-10-30 10:30", channelId: "3387148", channelName: "原创", viewerCount: 89, registrationCount: 100 },
-  { id: 3, createTime: "2025-10-30 11:00", channelId: "3386428", channelName: "游戏", viewerCount: 205, registrationCount: 300 },
-  { id: 4, createTime: "2025-10-30 11:30", channelId: "3385843", channelName: "教育", viewerCount: 310, registrationCount: 500 },
-  { id: 5, createTime: "2025-10-30 14:00", channelId: "3385674", channelName: "社会课堂", viewerCount: 420, registrationCount: 500 },
-  { id: 6, createTime: "2025-10-30 14:30", channelId: "3379988", channelName: "中秋直播", viewerCount: 78, registrationCount: 150 },
-  { id: 7, createTime: "2025-10-30 15:00", channelId: "3365921", channelName: "游戏", viewerCount: 156, registrationCount: 180 },
-  { id: 8, createTime: "2025-10-30 15:30", channelId: "3365259", channelName: "原创舞蹈", viewerCount: 92, registrationCount: 150 },
-  { id: 9, createTime: "2025-10-30 16:00", channelId: "3364223", channelName: "原创时尚", viewerCount: 189, registrationCount: 210 },
-  { id: 10, createTime: "2025-10-30 16:30", channelId: "3353683", channelName: "原创", viewerCount: 135, registrationCount: 160 },
-  { id: 11, createTime: "2025-10-30 17:00", channelId: "3349723", channelName: "教育", viewerCount: 68, registrationCount: 120 },
-  { id: 12, createTime: "2025-10-30 17:30", channelId: "3348835", channelName: "电影", viewerCount: 105, registrationCount: 190 }
+ { id: 1, createTime: "2025-10-30 10:00", channelId: "3390220", channelName: "音乐", viewerCount: "120人", registrationCount: "300人" },
+  { id: 2, createTime: "2025-10-30 10:30", channelId: "3387148", channelName: "原创", viewerCount: "89人", registrationCount: "100人" },
+  { id: 3, createTime: "2025-10-30 11:00", channelId: "3386428", channelName: "游戏", viewerCount: "205人", registrationCount: "300人" },
+  { id: 4, createTime: "2025-10-30 11:30", channelId: "3385843", channelName: "教育", viewerCount: "310人", registrationCount: "500人" },
+  { id: 5, createTime: "2025-10-30 14:00", channelId: "3385674", channelName: "社会课堂", viewerCount: "420人", registrationCount: "500人" },
+  { id: 6, createTime: "2025-10-30 14:30", channelId: "3379988", channelName: "中秋直播", viewerCount: "78人", registrationCount: "150人" },
+  { id: 7, createTime: "2025-10-30 15:00", channelId: "3365921", channelName: "游戏", viewerCount: "156人", registrationCount: "180人" },
+  { id: 8, createTime: "2025-10-30 15:30", channelId: "3365259", channelName: "原创舞蹈", viewerCount: "92人", registrationCount: "150人" },
+  { id: 9, createTime: "2025-10-30 16:00", channelId: "3364223", channelName: "原创时尚", viewerCount: "189人", registrationCount: "210人" },
+  { id: 10, createTime: "2025-10-30 16:30", channelId: "3353683", channelName: "原创", viewerCount: "135人", registrationCount: "160人" },
+  { id: 11, createTime: "2025-10-30 17:00", channelId: "3349723", channelName: "教育", viewerCount: "68人", registrationCount: "120人" },
+  { id: 12, createTime: "2025-10-30 17:30", channelId: "3348835", channelName: "电影", viewerCount: "105人", registrationCount: "190人" }
 ]);
 // 表格列：新增创建时间，操作列用bodyCell
 const registrationColumns = [
@@ -378,18 +378,18 @@ const handleRegistrationView = (record: any) => {
 // ---------------------- 2. 登记观看记录（修改后） ----------------------
 // 表格数据：补充id、createTime，channel→channelId，latestRecordTime保留
 const recordTableData = ref([
- { id: 1, createTime: "2025-10-03 09:00", latestRecordTime: "2025-10-28 09:15", channelId: "3390220", channelName: "音乐", registrationCount: 120 },
-  { id: 2, createTime: "2025-10-03 09:30", latestRecordTime: "2025-10-28 10:30", channelId: "3387148", channelName: "原创", registrationCount: 89 },
-  { id: 3, createTime: "2025-10-03 10:00", latestRecordTime: "2025-10-28 11:45", channelId: "3386428", channelName: "游戏", registrationCount: 205 },
-  { id: 4, createTime: "2025-10-03 10:30", latestRecordTime: "2025-10-28 13:00", channelId: "3385843", channelName: "教育", registrationCount: 310 },
-  { id: 5, createTime: "2025-10-03 11:00", latestRecordTime: "2025-10-28 14:20", channelId: "3385674", channelName: "社会课堂", registrationCount: 420 },
-  { id: 6, createTime: "2025-10-03 11:30", latestRecordTime: "2025-10-28 15:10", channelId: "3379988", channelName: "中秋直播", registrationCount: 78 },
-  { id: 7, createTime: "2025-10-03 14:00", latestRecordTime: "2025-10-28 16:30", channelId: "3365921", channelName: "游戏", registrationCount: 156 },
-  { id: 8, createTime: "2025-10-03 14:30", latestRecordTime: "2025-10-28 17:45", channelId: "3365259", channelName: "原创舞蹈", registrationCount: 92 },
-  { id: 9, createTime: "2025-10-03 15:00", latestRecordTime: "2025-10-28 18:20", channelId: "3364223", channelName: "原创时尚", registrationCount: 189 },
-  { id: 10, createTime: "2025-10-03 15:30", latestRecordTime: "2025-10-28 19:50", channelId: "3353683", channelName: "原创", registrationCount: 135 },
-  { id: 11, createTime: "2025-10-03 16:00", latestRecordTime: "2025-10-28 20:10", channelId: "3349723", channelName: "教育", registrationCount: 68 },
-  { id: 12, createTime: "2025-10-03 16:30", latestRecordTime: "2025-10-28 20:30", channelId: "3348835", channelName: "电影", registrationCount: 105 }
+ { id: 1, createTime: "2025-10-03 09:00", latestRecordTime: "2025-10-28 09:15", channelId: "3390220", channelName: "音乐", registrationCount: "120人" },
+  { id: 2, createTime: "2025-10-03 09:30", latestRecordTime: "2025-10-28 10:30", channelId: "3387148", channelName: "原创", registrationCount: "89人" },
+  { id: 3, createTime: "2025-10-03 10:00", latestRecordTime: "2025-10-28 11:45", channelId: "3386428", channelName: "游戏", registrationCount: "205人" },
+  { id: 4, createTime: "2025-10-03 10:30", latestRecordTime: "2025-10-28 13:00", channelId: "3385843", channelName: "教育", registrationCount: "310人" },
+  { id: 5, createTime: "2025-10-03 11:00", latestRecordTime: "2025-10-28 14:20", channelId: "3385674", channelName: "社会课堂", registrationCount: "420人" },
+  { id: 6, createTime: "2025-10-03 11:30", latestRecordTime: "2025-10-28 15:10", channelId: "3379988", channelName: "中秋直播", registrationCount: "78人" },
+  { id: 7, createTime: "2025-10-03 14:00", latestRecordTime: "2025-10-28 16:30", channelId: "3365921", channelName: "游戏", registrationCount: "156人" },
+  { id: 8, createTime: "2025-10-03 14:30", latestRecordTime: "2025-10-28 17:45", channelId: "3365259", channelName: "原创舞蹈", registrationCount: "92人" },
+  { id: 9, createTime: "2025-10-03 15:00", latestRecordTime: "2025-10-28 18:20", channelId: "3364223", channelName: "原创时尚", registrationCount: "189人" },
+  { id: 10, createTime: "2025-10-03 15:30", latestRecordTime: "2025-10-28 19:50", channelId: "3353683", channelName: "原创", registrationCount: "135人" },
+  { id: 11, createTime: "2025-10-03 16:00", latestRecordTime: "2025-10-28 20:10", channelId: "3349723", channelName: "教育", registrationCount: "68人" },
+  { id: 12, createTime: "2025-10-03 16:30", latestRecordTime: "2025-10-28 20:30", channelId: "3348835", channelName: "电影", registrationCount: "105人" }
 ]);
 // 表格列：保留最新记录时间，新增创建时间，操作列用bodyCell
 const recordColumns = [
@@ -419,18 +419,18 @@ const handleRecordView = (record: any) => {
 // ---------------------- 3. 预约观看记录（修改后） ----------------------
 // 表格数据：补充id、createTime，channel→channelId
 const reservationTableData = ref([
- { id: 1, createTime: "2025-10-03 08:00", channelId: "3390220", channelName: "音乐", reservationCount: 180 },
-  { id: 2, createTime: "2025-10-03 08:30", channelId: "3387148", channelName: "原创", reservationCount: 150 },
-  { id: 3, createTime: "2025-10-03 09:00", channelId: "3386428", channelName: "游戏", reservationCount: 220 },
-  { id: 4, createTime: "2025-10-03 09:30", channelId: "3385843", channelName: "教育", reservationCount: 380 },
-  { id: 5, createTime: "2025-10-03 10:00", channelId: "3385674", channelName: "社会课堂", reservationCount: 450 },
-  { id: 6, createTime: "2025-10-03 10:30", channelId: "3379988", channelName: "中秋直播", reservationCount: 120 },
-  { id: 7, createTime: "2025-10-03 11:00", channelId: "3365921", channelName: "游戏", reservationCount: 210 },
-  { id: 8, createTime: "2025-10-03 11:30", channelId: "3365259", channelName: "原创舞蹈", reservationCount: 160 },
-  { id: 9, createTime: "2025-10-03 14:00", channelId: "3364223", channelName: "原创时尚", reservationCount: 250 },
-  { id: 10, createTime: "2025-10-03 14:30", channelId: "3353683", channelName: "原创", reservationCount: 190 },
-  { id: 11, createTime: "2025-10-03 15:00", channelId: "3349723", channelName: "教育", reservationCount: 95 },
-  { id: 12, createTime: "2025-10-03 15:30", channelId: "3348835", channelName: "电影", reservationCount: 140 }
+ { id: 1, createTime: "2025-10-03 08:00", channelId: "3390220", channelName: "音乐", reservationCount: "180人" },
+  { id: 2, createTime: "2025-10-03 08:30", channelId: "3387148", channelName: "原创", reservationCount: "150人" },
+  { id: 3, createTime: "2025-10-03 09:00", channelId: "3386428", channelName: "游戏", reservationCount: "220人" },
+  { id: 4, createTime: "2025-10-03 09:30", channelId: "3385843", channelName: "教育", reservationCount: "380人" },
+  { id: 5, createTime: "2025-10-03 10:00", channelId: "3385674", channelName: "社会课堂", reservationCount: "450人" },
+  { id: 6, createTime: "2025-10-03 10:30", channelId: "3379988", channelName: "中秋直播", reservationCount: "120人" },
+  { id: 7, createTime: "2025-10-03 11:00", channelId: "3365921", channelName: "游戏", reservationCount: "210人" },
+  { id: 8, createTime: "2025-10-03 11:30", channelId: "3365259", channelName: "原创舞蹈", reservationCount: "160人" },
+  { id: 9, createTime: "2025-10-03 14:00", channelId: "3364223", channelName: "原创时尚", reservationCount: "250人" },
+  { id: 10, createTime: "2025-10-03 14:30", channelId: "3353683", channelName: "原创", reservationCount: "190人" },
+  { id: 11, createTime: "2025-10-03 15:00", channelId: "3349723", channelName: "教育", reservationCount: "95人" },
+  { id: 12, createTime: "2025-10-03 15:30", channelId: "3348835", channelName: "电影", reservationCount: "140人" }
 ]);
 // 表格列：新增创建时间，操作列用bodyCell
 const reservationColumns = [

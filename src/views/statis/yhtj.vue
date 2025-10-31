@@ -58,77 +58,77 @@ const columns = [
   { title: "操作", key: "action", scopedSlots: { customRender: "action" } },
 ];
 const tableData = ref([
-  {
-    userId: "U001234",  // 格式调整：前缀U+6位数字
+   {
+    userId: "U001234",
     username: "用户A",
-    viewCount: 10,
-    viewDuration: 120,
+    viewCount: "10次",
+    viewDuration: "120分钟"
   },
   {
-    userId: "U007890",  // 格式调整：前缀U+6位数字
+    userId: "U007890",
     username: "用户B",
-    viewCount: 5,
-    viewDuration: 60,
+    viewCount: "5次",
+    viewDuration: "60分钟"
   },
   {
-    userId: "U007891",  // 原789013调整为U007891（确保唯一）
+    userId: "U007891",
     username: "张三",
-    viewCount: 10,
-    viewDuration: 80,
+    viewCount: "10次",
+    viewDuration: "80分钟"
   },
   {
-    userId: "U007892",  // 原789014调整为U007892（确保唯一）
+    userId: "U007892",
     username: "李四",
-    viewCount: 6,
-    viewDuration: 70,
+    viewCount: "6次",
+    viewDuration: "70分钟"
   },
   {
-    userId: "U007893",  // 原重复789014调整为U007893（避免重复）
+    userId: "U007893",
     username: "王五",
-    viewCount: 8,
-    viewDuration: 90,
+    viewCount: "8次",
+    viewDuration: "90分钟"
   },
   {
-    userId: "U007894",  // 原789015调整为U007894（确保唯一）
+    userId: "U007894",
     username: "赵六",
-    viewCount: 5,
-    viewDuration: 50,
+    viewCount: "5次",
+    viewDuration: "50分钟"
   },
   {
-    userId: "U007895",  // 原789016调整为U007895（确保唯一）
+    userId: "U007895",
     username: "孙七",
-    viewCount: 9,
-    viewDuration: 100,
+    viewCount: "9次",
+    viewDuration: "100分钟"
   },
   {
-    userId: "U007896",  // 原789017调整为U007896（确保唯一）
+    userId: "U007896",
     username: "小李",
-    viewCount: 3,
-    viewDuration: 60,
+    viewCount: "3次",
+    viewDuration: "60分钟"
   },
   {
-    userId: "U007897",  // 原789018调整为U007897（确保唯一）
+    userId: "U007897",
     username: "小孙",
-    viewCount: 5,
-    viewDuration: 60,
+    viewCount: "5次",
+    viewDuration: "60分钟"
   },
   {
-    userId: "U007898",  // 原789019调整为U007898（确保唯一）
+    userId: "U007898",
     username: "小花",
-    viewCount: 4,
-    viewDuration: 60,
+    viewCount: "4次",
+    viewDuration: "60分钟"
   },
   {
-    userId: "U007899",  // 原789022调整为U007899（确保唯一）
+    userId: "U007899",
     username: "用户B",
-    viewCount: 5,
-    viewDuration: 60,
+    viewCount: "5次",
+    viewDuration: "60分钟"
   },
   {
-    userId: "U007810",  // 原789010调整为U007810（确保唯一）
+    userId: "U007810",
     username: "李华",
-    viewCount: 5,
-    viewDuration: 60,
+    viewCount: "5次",
+    viewDuration: "60分钟"
   }
 ]);
 
