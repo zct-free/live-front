@@ -29,7 +29,6 @@
             style="width: 300px"
           />
         </a-form-item>-->
-       
 
         <a-form-item>
           <a-button type="primary" @click="handleSearch">筛选</a-button>
@@ -413,7 +412,7 @@ const mockData = [
     avatar: "",
     description: "旅行博主，分享旅行见闻",
   },
-    {
+  {
     id: "A009",
     nickname: "时尚穿搭",
     gender: "女",
@@ -424,18 +423,18 @@ const mockData = [
     avatar: "",
     description: "穿搭博主，分享时尚穿搭",
   },
-    {
+  {
     id: "A010",
     nickname: "读书分享",
     gender: "男",
     currentFollowers: 14200,
-    liveCount: 	65,
+    liveCount: 65,
     totalViewers: 32500,
     totalViewTime: 3890,
     avatar: "",
     description: "读书博主，分享最新读书",
   },
-    {
+  {
     id: "A011",
     nickname: "手工制作",
     gender: "男",
@@ -446,7 +445,7 @@ const mockData = [
     avatar: "",
     description: "手工博主，分享手工制作",
   },
-    {
+  {
     id: "A012",
     nickname: "汽车测评",
     gender: "男",
@@ -672,97 +671,96 @@ onMounted(() => {
     padding: 24px;
   }
 
-  .avatar-upload-container {
-    .avatar-upload-area {
-      width: 100px;
-      height: 100px;
-      border: 2px dashed #d9d9d9;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fafafa;
-      transition: all 0.3s;
-
-      &:hover {
-        border-color: #1890ff;
-      }
-
-      .avatar-preview {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 6px;
-      }
-
-      .upload-placeholder {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: #999;
-      }
-    }
-
-    .upload-tip {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #999;
-    }
-  }
-
-  .cover-upload-container {
-    .cover-upload-area {
-      width: 320px;
-      height: 180px;
-      border: 2px dashed #d9d9d9;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fafafa;
-      transition: all 0.3s;
-
-      &:hover {
-        border-color: #1890ff;
-      }
-
-      .cover-preview {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 6px;
-      }
-
-      .upload-placeholder {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: #999;
-
-        .upload-text {
-          margin-top: 8px;
-          font-size: 14px;
-        }
-      }
-    }
-
-    .upload-tip {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #999;
-    }
-  }
-
   .modal-footer {
     display: flex;
     justify-content: flex-end;
     margin-top: 24px;
     padding-top: 16px;
     border-top: 1px solid #f0f0f0;
+  }
+}
+
+.cover-upload-container {
+  .cover-upload-area {
+    width: 320px;
+    height: 180px;
+    border: 2px dashed #d9d9d9;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+    transition: all 0.3s;
+
+    &:hover {
+      border-color: #1890ff;
+    }
+
+    .cover-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .upload-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+
+      .upload-text {
+        margin-top: 8px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .upload-tip {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #999;
+  }
+}
+.avatar-upload-container {
+  .avatar-upload-area {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed #d9d9d9;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+    transition: all 0.3s;
+
+    &:hover {
+      border-color: #1890ff;
+    }
+
+    .avatar-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .upload-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+    }
+  }
+
+  .upload-tip {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #999;
   }
 }
 </style>
