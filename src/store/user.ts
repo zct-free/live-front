@@ -6,7 +6,6 @@ import { defineStore } from "pinia";
 import type { RouteRecordRaw } from "vue-router";
 
 
-import { getMenusApi } from "@/api/index"; // 引入获取菜单的API
 // 定义状态类型
 interface UserState {
   token: string;
@@ -18,11 +17,11 @@ interface UserState {
 
 export const useUserStore = defineStore("user", {
   state: (): UserState => ({
-    token: localStorage.getItem("token") || "",
+    token: "",
     userInfo: null,
     loading: false,
     permissions: [],
-    routes: [...asyncRoutes],
+    routes: [],
   }),
 
   getters: {
@@ -119,8 +118,9 @@ export const useUserStore = defineStore("user", {
     },
     async generateRoutes(): Promise<any> {
       try {
-        const res = await getMenusApi({ menuId: "2001" });
-        const roles = getAsycMenus(res?.children || []);
+        // const res = await getMenusApi({ menuId: "2001" });
+        // const roles = getAsycMenus(res?.children || []);
+        const roles = getAsycMenus(asyncRoutes);
         const accessRoutes = filterAsyncRoutes(asyncRoutes || [], roles);
         (this as any).routes = accessRoutes; // 保存到状态中
         return accessRoutes;
@@ -154,6 +154,7 @@ const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]): RouteReco
   return res;
 };
 const hasPermission = (route: RouteRecordRaw, roles: string[]): boolean => {
+  return true;
   if (route.name && typeof route.name === "string") {
     return roles.includes(route.name) || route.name === "NotFound";
   }

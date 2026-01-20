@@ -265,9 +265,9 @@ router.beforeEach(async (to, _from, next) => {
     const userStore = useUserStore();
     try {
       if (!hasAddedRoutes) {
-        // const accessRoutes = await (userStore as any).generateRoutes();
-        // addAsyncRoutes(accessRoutes);
-        // await new Promise(resolve => setTimeout(resolve, 30));
+        const accessRoutes = await (userStore as any).generateRoutes();
+        addAsyncRoutes(accessRoutes);
+        await new Promise(resolve => setTimeout(resolve, 30));
         hasAddedRoutes = true;
         const matched = router.resolve(to).matched;
         if (matched.length === 0) {
