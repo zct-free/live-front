@@ -5,6 +5,7 @@ import { get } from "@/utils/request";
 import { defineStore } from "pinia";
 import type { RouteRecordRaw } from "vue-router";
 
+
 import { getMenusApi } from "@/api/index"; // 引入获取菜单的API
 // 定义状态类型
 interface UserState {
@@ -21,7 +22,7 @@ export const useUserStore = defineStore("user", {
     userInfo: null,
     loading: false,
     permissions: [],
-    routes: [],
+    routes: [...asyncRoutes],
   }),
 
   getters: {

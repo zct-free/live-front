@@ -242,7 +242,7 @@ export const asyncRoutes = [
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: routes, // Combine static and async routes
+  routes: routes.concat(asyncRoutes), // Combine static and async routes
 });
 
 let hasAddedRoutes = false;
@@ -265,9 +265,9 @@ router.beforeEach(async (to, _from, next) => {
     const userStore = useUserStore();
     try {
       if (!hasAddedRoutes) {
-        const accessRoutes = await (userStore as any).generateRoutes();
-        addAsyncRoutes(accessRoutes);
-        await new Promise(resolve => setTimeout(resolve, 30));
+        // const accessRoutes = await (userStore as any).generateRoutes();
+        // addAsyncRoutes(accessRoutes);
+        // await new Promise(resolve => setTimeout(resolve, 30));
         hasAddedRoutes = true;
         const matched = router.resolve(to).matched;
         if (matched.length === 0) {
