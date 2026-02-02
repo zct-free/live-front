@@ -1,28 +1,31 @@
 <template>
   <a-menu-item v-if="!hasChildren" :key="`${route.name?.toString() || route.path}`">
     <router-link :to="getRoutePath()">
-      <span>{{ route.meta?.title || route.name }}</span>
+      <span>{{ route?.meta?.title || route?.name }}</span>
     </router-link>
   </a-menu-item>
 
   <a-sub-menu v-else :key="route.name?.toString() || route.path">
     <template #title>
-      <span>{{ route.meta?.title || route.name }}</span>
+      <span>{{ route?.meta?.title || route?.name }}</span>
     </template>
     <menu-item v-for="child in visibleChildren" :key="child.name || child.path" :route="child" :icons="icons" />
   </a-sub-menu>
 </template>
 
-<script setup lang="ts">
+<script setup lang="js">
 import { computed } from "vue";
-import { RouteRecordRaw } from "vue-router";
 
-interface Props {
-  route: RouteRecordRaw;
-  icons: { [key: string]: any };
-}
-
-const props = defineProps<Props>();
+const props = defineProps({
+  route: {
+    type: Object,
+    default: () => {},
+  },
+  icons: {
+    type: Object,
+    default: () => {},
+  },
+});
 
 // 计算是否有可见的子菜单
 const hasChildren = computed(() => {

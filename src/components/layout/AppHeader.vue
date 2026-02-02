@@ -4,42 +4,14 @@
       <BreadCrumb />
 
       <div class="user-info">
-        <div>你好，测试用户</div>
-        <!-- <div @click="handleLogout" class="logout"><LogoutOutlined class="logout-icon" />安全退出</div> -->
+        <div>你好,{{ userStore?.userName }}</div>
       </div>
-
-      <!-- <a-dropdown>
-				<template #overlay>
-					<a-menu>
-						<a-menu-item key="profile">
-							<UserOutlined />
-							个人资料
-						</a-menu-item>
-						<a-menu-item key="settings">
-							<SettingOutlined />
-							设置
-						</a-menu-item>
-						<a-menu-divider />
-						<a-menu-item key="logout" @click="handleLogout">
-							<LogoutOutlined />
-							退出登录
-						</a-menu-item>
-					</a-menu>
-				</template>
-				<a-button type="text" class="user-info">
-					<a-avatar :size="32" :src="(userStore as any).userInfo?.avatar">
-						<template #icon><UserOutlined /></template>
-					</a-avatar>
-					<span class="username">{{ (userStore as any).userInfo?.name || "用户" }}</span>
-					<DownOutlined />
-				</a-button>
-			</a-dropdown> -->
     </div>
   </a-layout-header>
 </template>
 
-<script setup lang="ts">
-import BreadCrumb from "@/components/layout/BreadCrumb.vue";
+<script setup lang="js">
+import BreadCrumb from "@/components/Layout/BreadCrumb.vue";
 import { useUserStore } from "@/store/user";
 import { message } from "ant-design-vue";
 import { useRouter } from "vue-router";
@@ -49,7 +21,7 @@ const userStore = useUserStore();
 
 const handleLogout = async () => {
   try {
-    await (userStore as any).logout();
+    await userStore.logout();
     message.success("已成功退出登录");
     router.push({ name: "login" });
   } catch (error) {

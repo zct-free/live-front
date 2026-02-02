@@ -7,7 +7,7 @@
 import { computed } from "vue";
 
 const url = computed(() => {
-  return `http://140.210.90.103:39847/course-system/live/manage`;
+  return `http://192.168.187.3:39847/course-system/live/manage`;
 });
 </script>
 <style scoped>

@@ -1,17 +1,14 @@
-import path from "path";
-import { defineConfig, loadEnv, type ConfigEnv, type UserConfig } from "vite";
-import { createVitePlugins } from "./build/plugin/index";
+import { resolve } from "path";
+import { defineConfig } from "vite";
+import { createVitePlugins } from "./src/utils/createVitePlugins";
 
-export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
-  const root = process.cwd();
-  const env = loadEnv(mode, root, "");
-  const { VITE_PUBLIC_PATH } = env;
-  const isBuild = command === "build";
+export default defineConfig(({ mode }) => {
   const isProduction = mode === "production";
+  //  const env = loadEnv(mode, process.cwd());
   return {
-    root,
+    root: process.cwd(),
     base: "/live-system/",
-    plugins: createVitePlugins(env, isBuild),
+    plugins: createVitePlugins(),
     server: {
       host: true,
       open: true,
@@ -20,7 +17,7 @@ export default defineConfig(({ mode, command }: ConfigEnv): UserConfig => {
       alias: [
         {
           find: "@",
-          replacement: path.resolve(__dirname, "src"),
+          replacement: resolve(process.cwd(), "src"),
         },
       ],
     },

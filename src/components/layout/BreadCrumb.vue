@@ -10,7 +10,7 @@
   </a-breadcrumb>
 </template>
 
-<script setup lang="ts">
+<script setup lang="js">
 import { HomeOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons-vue";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
@@ -19,15 +19,23 @@ const route = useRoute();
 
 // 面包屑数据
 const breadcrumbItems = computed(() => {
-  const matched = route.matched.filter(item => item.meta && item.meta.title);
-  const items: Array<{
-    title: string;
-    path?: string;
-    icon?: any;
-    name?: string;
-    redirect?: string | undefined;
-  }> = [];
-  console.log(matched);
+  const matched = route.matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false);
+
+  const items = [
+    {
+      title: "首页",
+      path: "/home",
+      icon: HomeOutlined,
+      name: "home",
+      redirect: "/home",
+    },
+  ];
+  if (matched[0]?.path?.includes("home")) {
+
+    return items
+  }
+
+
   // 添加当前路由路径
   matched.forEach((match, index) => {
     const isLast = index === matched.length - 1;
@@ -38,21 +46,20 @@ const breadcrumbItems = computed(() => {
       title: isLast
         ? typeof route?.query?.title === "string"
           ? route.query.title
-          : (match.meta.title as string)
-        : (match.meta.title as string),
+          : match.meta.title
+        : match.meta.title,
       path: isLast ? undefined : fullPath,
-      icon: match.meta.icon ? getIconComponent(match.meta.icon as string) : undefined,
-      name: match.name as string,
+      icon: match.meta.icon ? getIconComponent(match.meta.icon) : undefined,
+      name: match.name,
       redirect: match.redirect,
     });
   });
   return items;
 });
-console.log(breadcrumbItems, "333333333");
 
 // 获取图标组件
-const getIconComponent = (iconName: string) => {
-  const iconMap: Record<string, any> = {
+const getIconComponent = iconName => {
+  const iconMap = {
     HomeOutlined,
     UserOutlined,
     SettingOutlined,

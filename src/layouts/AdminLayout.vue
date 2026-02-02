@@ -4,15 +4,17 @@
     <a-layout>
       <AppHeader />
       <a-layout-content class="content-area">
-        <router-view />
+        <div class="content-wrapper">
+          <router-view />
+        </div>
       </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 
-<script setup lang="ts">
-import AppHeader from "@/components/layout/AppHeader.vue";
-import AppSidebar from "@/components/layout/AppSidebar.vue";
+<script setup lang="js">
+import AppHeader from "@/components/Layout/AppHeader.vue";
+import AppSidebar from "@/components/Layout/AppSidebar.vue";
 </script>
 
 <style lang="less" scoped>
@@ -41,10 +43,14 @@ import AppSidebar from "@/components/layout/AppSidebar.vue";
 }
 
 .content-area {
-  flex: 1;
-  overflow-y: auto;
+  height: calc(100vh - 64px);
   padding: 20px;
-  background: #fff;
-  width: 100%;
+  background-color: #f0f2f5;
+  overflow: auto;
+
+  .content-wrapper {
+    background: #fff;
+    min-height: 100%;
+  }
 }
 </style>
